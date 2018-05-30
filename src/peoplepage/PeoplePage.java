@@ -11,16 +11,13 @@ import login.Login;
 import adminpage.AdminPage;
 import adminpage.AdminPageController;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import models.SupplierModel;
 import models.UserModel;
 import net.proteanit.sql.DbUtils;
-import productpage.ProductPageController;
 import supplier.AddSupplier;
 import user.AddUser;
+import user.UpdateUser;
 
 /**
  *
@@ -57,8 +54,18 @@ public class PeoplePage extends javax.swing.JFrame {
         
         UserModel um = new UserModel();
         SupplierModel sm = new SupplierModel();
-        ResultSet rs = um.viewAll();
+        ResultSet rs = null;
         ResultSet rs2 = sm.viewAll();
+        String val = um.determineBranch(name);
+        
+        
+        if(val.compareTo("1")==0){
+            comboBranch.setSelectedIndex(0);
+            rs = um.viewLeyte("1");
+        }else{
+            comboBranch.setSelectedIndex(1);
+            rs = um.viewLeyte("2");
+        }
         
         tblUser.setModel(DbUtils.resultSetToTableModel(rs));
         tblSupplier.setModel(DbUtils.resultSetToTableModel(rs2));
@@ -91,7 +98,7 @@ public class PeoplePage extends javax.swing.JFrame {
         DeleteUser = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        btnBranch = new javax.swing.JComboBox<>();
+        comboBranch = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSupplier = new javax.swing.JTable();
@@ -145,9 +152,7 @@ public class PeoplePage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblUser.setCellSelectionEnabled(false);
         tblUser.setRowHeight(25);
-        tblUser.setRowSelectionAllowed(true);
         tblUser.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblUser);
         tblUser.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -162,6 +167,11 @@ public class PeoplePage extends javax.swing.JFrame {
 
         UpdateUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         UpdateUser.setText("UPDATE");
+        UpdateUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateUserActionPerformed(evt);
+            }
+        });
 
         DeleteUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         DeleteUser.setText("DELETE");
@@ -173,10 +183,10 @@ public class PeoplePage extends javax.swing.JFrame {
 
         jLabel2.setText("Search:");
 
-        btnBranch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cebu Branch", "Leyte Branch" }));
-        btnBranch.addActionListener(new java.awt.event.ActionListener() {
+        comboBranch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cebu Branch", "Leyte Branch" }));
+        comboBranch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBranchActionPerformed(evt);
+                comboBranchActionPerformed(evt);
             }
         });
 
@@ -193,7 +203,7 @@ public class PeoplePage extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnBranch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboBranch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(AddUser)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -206,13 +216,14 @@ public class PeoplePage extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DeleteUser)
-                    .addComponent(AddUser)
-                    .addComponent(UpdateUser)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBranch, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comboBranch, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(DeleteUser)
+                        .addComponent(AddUser)
+                        .addComponent(UpdateUser)
+                        .addComponent(jLabel2)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
                 .addContainerGap())
@@ -359,17 +370,7 @@ public class PeoplePage extends javax.swing.JFrame {
     }//GEN-LAST:event_AddUserActionPerformed
 
     private void DeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteUserActionPerformed
-//        if (tblUser.getSelectedRow() != -1) {
-//            int x = tblUser.getSelectedRow();
-//            int y = tblUser.getSelectedColumn();
-//            String z = tblUser.getModel().getValueAt(x,0).toString();
-//            int del = Integer.parseInt(z);
-//            int opt = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete?");
-//            if (opt == JOptionPane.YES_OPTION){
-//                apc.deleteUser(del);
-//                ((DefaultTableModel)tblUser.getModel()).removeRow(x);
-//            }
-            if (tblUser.getSelectedRow() != -1) {
+    if (tblUser.getSelectedRow() != -1) {
             String userNumber;
             PeoplePageController peop = new PeoplePageController();
             
@@ -402,9 +403,26 @@ public class PeoplePage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_DeleteSupplierActionPerformed
 
-    private void btnBranchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBranchActionPerformed
+    private void comboBranchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBranchActionPerformed
+        UserModel um = new UserModel();
+        ResultSet rs = null;
         
-    }//GEN-LAST:event_btnBranchActionPerformed
+        if(comboBranch.getSelectedItem().toString().compareTo("Cebu Branch")==0){
+            rs = um.viewLeyte("1");
+        }else{
+            rs = um.viewLeyte("2");
+        }
+        
+        tblUser.setModel(DbUtils.resultSetToTableModel(rs)); 
+
+        
+    }//GEN-LAST:event_comboBranchActionPerformed
+
+    private void UpdateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateUserActionPerformed
+        UpdateUser upuser = new UpdateUser(this.getName());
+        upuser.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_UpdateUserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -454,7 +472,7 @@ public class PeoplePage extends javax.swing.JFrame {
     private javax.swing.JButton DeleteUser;
     private javax.swing.JButton UpdateSupplier;
     private javax.swing.JButton UpdateUser;
-    private javax.swing.JComboBox<String> btnBranch;
+    private javax.swing.JComboBox<String> comboBranch;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
@@ -471,6 +489,7 @@ public class PeoplePage extends javax.swing.JFrame {
     private javax.swing.JTable tblSupplier;
     private javax.swing.JTable tblUser;
     // End of variables declaration//GEN-END:variables
+
 
 
 }

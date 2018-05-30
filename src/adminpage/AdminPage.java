@@ -219,7 +219,7 @@ public class AdminPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ChangeFund cf = new ChangeFund(this.getName());
+        ChangeFund cf = new CashFund(this.getName());
         cf.getLblUser().setText("Welcome "+this.getName());
         cf.setVisible(true);
 

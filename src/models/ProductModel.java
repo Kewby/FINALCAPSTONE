@@ -47,10 +47,10 @@ public class ProductModel extends MyModel{
         ResultSet ret = null;
         this.initialize(); //initialize db
         
-        String str = "SELECT product_code AS 'Product Code', "
-                + "product_name AS 'Name', (SELECT category.category_name FROM category WHERE product.category_id = category.category_id) AS 'Category', "
-                + "(CASE WHEN product_type = 'true' THEN 'Non-Agricultural' ELSE 'Agricultural' END) AS 'Product Type', product_price AS 'Price', "
-                + "product_stock AS 'Stock' from product where deleteStatus = 0";
+        String str = "SELECT product_code AS 'Item Code', "
+                + "product_name AS 'Name', product_category AS 'Category', "
+                + "product_type AS 'Type', product_price AS 'Price', "
+                + "product_stock AS 'Stock' from products where deleteStatus = 0";
         
         try {
             st = conn.createStatement();

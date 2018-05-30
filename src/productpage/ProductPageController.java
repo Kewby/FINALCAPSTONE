@@ -28,26 +28,26 @@ public class ProductPageController {
      }
     
      public ResultSet viewAll (){
-//        Vector row;
+        Vector row;
         ProductModel pm = new ProductModel();
         ResultSet rs = pm.viewAll();
         
-//        DefaultTableModel dm;
-//        //dm = (DefaultTableModel) prp.getTblProduct().getModel();
-//        //dm. setRowCount(0);
+        DefaultTableModel dm;
+        //dm = (DefaultTableModel) prp.getTblProduct().getModel();
+        //dm. setRowCount(0);
         
         try {
             while (rs.next()) {
-//                row = new Vector();
-//                
-//                row.add(rs.getInt("product_code"));
-//                row.add(rs.getInt("product_name"));
-//                row.add(rs.getInt("product_category"));
-//                row.add(rs.getInt("product_type"));
-//                row.add(rs.getInt("product_price"));
-//                row.add(rs.getInt("product_stock"));
-//                
-//                //dm.addRow(row);
+                row = new Vector();
+                
+                row.add(rs.getInt("product_code"));
+                row.add(rs.getInt("product_name"));
+                row.add(rs.getInt("product_category"));
+                row.add(rs.getInt("product_type"));
+                row.add(rs.getInt("product_price"));
+                row.add(rs.getInt("product_stock"));
+                
+                //dm.addRow(row);
             }
             
             

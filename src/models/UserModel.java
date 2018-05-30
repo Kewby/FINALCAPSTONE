@@ -63,11 +63,11 @@ public class UserModel extends MyModel {
         return null;
     }
     
-    public ResultSet viewLeyte () {
+    public ResultSet viewLeyte (String id) {
         Statement st;
         this.initialize(); //initialize db
         
-        String str = "SELECT user_firstname AS 'First Name', user_lastname AS 'Last Name', username AS 'Username', user_email AS 'E-mail', user_contactnumber AS 'Contact Number' FROM user WHERE branch_id=2 AND isAdmin=0 AND deleteStatus=0"; //all not admin user 
+        String str = "SELECT user_firstname AS 'First Name', user_lastname AS 'Last Name', username AS 'Username', user_email AS 'E-mail', user_contactnumber AS 'Contact Number' FROM user WHERE branch_id="+id+" AND isAdmin=0 AND deleteStatus=0"; //all not admin user 
         
         try {
             st = conn.createStatement();
@@ -108,6 +108,26 @@ public class UserModel extends MyModel {
         } catch (SQLException ex) {
         }
         
+        return ret;
+    }
+    
+    public String determineBranch (String username) {
+        Statement st;
+        ResultSet rs = null;
+        String ret = null;
+        this.initialize(); //initialize db
+        
+        String str = "select `branch_id` from user where username = '"
+                +username+"' limit 1";
+        
+        
+        try {
+            st = conn.createStatement();     
+            rs = st.executeQuery(str);
+            //retrive the value from the first return row.
+            rs.next();
+            ret = rs.getString(1);
+        } catch (SQLException ex) {}
         return ret;
     }
     

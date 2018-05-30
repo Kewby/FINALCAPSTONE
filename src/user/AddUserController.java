@@ -27,6 +27,20 @@ public class AddUserController {
         au.getComboRole().setSelectedItem("");
     }
     
+    public void clear (UpdateUser upuser) {
+        upuser.getTxtFname().setText("");
+        upuser.getTxtLname().setText("");
+        upuser.getTxtUsername().setText("");
+        upuser.getTxtPassword().setText("");
+        upuser.getTxtEmail().setText("");
+        upuser.getTxtContactNo().setText("");
+        upuser.getTxtAddress().setText("");
+        upuser.getComboBranch().setSelectedItem("");
+        upuser.getComboRole().setSelectedItem("");
+    }
+    
+    
+    
     public void add (AddUser au) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-yy");
         
