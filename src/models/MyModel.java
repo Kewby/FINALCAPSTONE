@@ -18,8 +18,8 @@ import java.util.logging.Logger;
 public class MyModel {
     
     Connection conn = null;
-    String username = "tanciongsdb";
-    String password = "Hg5fMoKQ9_3~";
+    String username = "root";
+    String password = "";
     
     public void initialize () {
         
@@ -30,7 +30,7 @@ public class MyModel {
         }
         
         try {
-            conn  = (Connection) DriverManager.getConnection("jdbc:mysql://den1.mysql3.gear.host/tanciongsdb", 
+            conn  = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/tanciongsdb", 
                     username, password);
         } catch (SQLException ex) {
             Logger.getLogger(MyModel.class.getName()).log(Level.SEVERE, null, ex);

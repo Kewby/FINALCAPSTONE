@@ -47,10 +47,10 @@ public class ProductModel extends MyModel{
         ResultSet ret = null;
         this.initialize(); //initialize db
         
-        String str = "SELECT product_code AS 'Item Code', "
-                + "product_name AS 'Name', product_category AS 'Category', "
+        String str = "SELECT product_code AS 'Product Code', "
+                + "product_name AS 'Name', category_id AS 'Category', "
                 + "product_type AS 'Type', product_price AS 'Price', "
-                + "product_stock AS 'Stock' from products where deleteStatus = 0";
+                + "product_stock AS 'Stock' from product where deleteStatus = 0";
         
         try {
             st = conn.createStatement();
