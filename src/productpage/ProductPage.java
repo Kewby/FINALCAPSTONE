@@ -59,28 +59,6 @@ public class ProductPage extends javax.swing.JFrame {
         
         tblProduct.setModel(DbUtils.resultSetToTableModel(rs));
     }
-    
-    
-//    public ProductPage(String name) {
-//        initComponents();
-//        
-//        this.setLocationRelativeTo(null);
-//        setName(name);
-//        
-//       ProductPageController c = new ProductPageController();
-//       ResultSet r = c.test();
-//        tblProduct.setModel(DbUtils.resultSetToTableModel(r));
-//        
-//        try {
-//            
-//            while(r.next()){
-//                System.out.println(r.getInt(1));
-//                System.out.println(r.getInt(2));
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ProductPage.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
 
     /**
      * This method is called from within the constructor to initialize the form.

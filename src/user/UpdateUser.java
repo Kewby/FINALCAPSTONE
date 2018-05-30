@@ -9,6 +9,8 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import models.UserModel;
+import net.proteanit.sql.DbUtils;
 import peoplepage.PeoplePage;
 
 /**
@@ -42,6 +44,11 @@ public class UpdateUser extends javax.swing.JFrame {
         
         this.setLocationRelativeTo(null);
         setName(name);
+        
+        UserModel um = new UserModel();
+        ResultSet rs = um.update();
+        
+        tblProduct.setModel(DbUtils.resultSetToTableModel(rs));
     }
     /**
      * This method is called from within the constructor to initialize the form.

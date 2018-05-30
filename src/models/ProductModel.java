@@ -30,7 +30,7 @@ public class ProductModel extends MyModel{
         int ret = 0;
         this.initialize(); //initialize db
         
-        String str = "update products set deleteStatus = 1 where product_number = '"+this.product_code+"'";
+        String str = "UPDATE product set deleteStatus = 1 where product_number = '"+this.product_code+"'";
         
         System.out.println(str);
         try {
@@ -47,10 +47,10 @@ public class ProductModel extends MyModel{
         ResultSet ret = null;
         this.initialize(); //initialize db
         
-        String str = "SELECT product_code AS 'Item Code', "
-                + "product_name AS 'Name', product_category AS 'Category', "
-                + "product_type AS 'Type', product_price AS 'Price', "
-                + "product_stock AS 'Stock' from products where deleteStatus = 0";
+        String str = "SELECT product_code AS 'Product Code', "
+                + "product_name AS 'Name', (SELECT category.category_name FROM category WHERE product.category_id = category.category_id) AS 'Category', "
+                + "(CASE WHEN product_type = 'true' THEN 'Non-Agricultural' ELSE 'Agricultural' END) AS 'Product Type', product_price AS 'Price', "
+                + "product_stock AS 'Stock' from product where deleteStatus = 0";
         
         try {
             st = conn.createStatement();
@@ -64,7 +64,7 @@ public class ProductModel extends MyModel{
         int ret = 0;
         this.initialize(); //initialize db
         
-        String str = "insert into products values (null, '"
+        String str = "INSERT INTO products values (null, '"
                 +this.product_code+"', '"+this.product_name+"', '"
                 +this.product_category+"', '"+this.product_type+"', "
                 +this.product_price+", "+this.product_stock+",)";
@@ -81,12 +81,17 @@ public class ProductModel extends MyModel{
     public int update(){
         Statement st;
         int ret = 0;
-        this.initialize();
+        this.initialize(); //initialize db
         
-//        String str = "UPDATE `product` SET `product_code` = '101DAD13',"
-//                + "`product_name` = 'TESTING', `product_category` = 'TESTING', "
-//                + "`deleteStatus` = '0' WHERE `product`.`product_id` = 19;"
-        return 0;
+        String str = "UPDATE `product` SET `product_name` = '"+this.product_name+"' WHERE `product`.`product_id` = '"+this.product_id+"'";
+        
+        try {
+            st = conn.createStatement();
+            ret = st.executeUpdate(str);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
     }
 
     public int getProduct_id() {

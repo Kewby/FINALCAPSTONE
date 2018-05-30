@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2018 at 07:27 AM
+-- Generation Time: May 31, 2018 at 01:56 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -77,11 +77,11 @@ INSERT INTO `category` (`category_id`, `category_name`, `description`) VALUES
 
 CREATE TABLE `order` (
   `order_id` int(11) NOT NULL,
-  `order_tender` float DEFAULT NULL,
-  `order_change` float DEFAULT NULL,
+  `order_tender` float(255,2) DEFAULT NULL,
+  `order_change` float(255,2) DEFAULT NULL,
   `order_date` date DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -94,9 +94,9 @@ CREATE TABLE `orderitem` (
   `product_id` int(11) DEFAULT NULL,
   `order_id` int(11) DEFAULT NULL,
   `orderItem_qty` int(11) DEFAULT NULL,
-  `orderItem_unitPrice` float DEFAULT NULL,
-  `orderItem_totalPrice` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `orderItem_unitPrice` float(255,2) DEFAULT NULL,
+  `orderItem_totalPrice` float(255,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -106,15 +106,27 @@ CREATE TABLE `orderitem` (
 
 CREATE TABLE `product` (
   `product_id` int(11) NOT NULL,
-  `product_code` int(11) DEFAULT NULL,
+  `product_code` bigint(255) DEFAULT NULL,
   `product_name` varchar(255) DEFAULT NULL,
   `product_type` tinyint(1) DEFAULT NULL,
   `product_price` float(255,2) DEFAULT NULL,
   `product_stock` int(11) DEFAULT NULL,
   `branch_id` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
-  `deleteStatus` int(11) DEFAULT NULL
+  `deleteStatus` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`product_id`, `product_code`, `product_name`, `product_type`, `product_price`, `product_stock`, `branch_id`, `category_id`, `deleteStatus`) VALUES
+(1, 4801231094, '500g Nestle Heavenly Mango Yogurt', 1, 76.50, 25, 1, 8, 0),
+(2, 4801730400, '500mL Absolute Distilled Drinking Water', 1, 28.50, 50, 1, 10, 0),
+(3, 8522030456, '300g Selecta Coffee Crumble Ice Cream', 1, 50.00, 25, 2, 8, 0),
+(4, 7562304812, '5 Kilo Ganador Rice', 1, 250.50, 3, 2, 7, 0),
+(5, 7135410323, '200mL Zonrox Color Safe Bleach', 0, 65.50, 10, 1, 6, 0),
+(6, 7135410323, '200mL Zonrox Color Safe Bleach', 0, 65.50, 10, 2, 6, 0);
 
 -- --------------------------------------------------------
 
@@ -209,15 +221,14 @@ ALTER TABLE `category`
 --
 ALTER TABLE `order`
   ADD PRIMARY KEY (`order_id`),
-  ADD KEY `order_fk` (`user_id`);
+  ADD KEY `order_fk1` (`user_id`);
 
 --
 -- Indexes for table `orderitem`
 --
 ALTER TABLE `orderitem`
   ADD PRIMARY KEY (`orderItem_id`),
-  ADD KEY `order_id` (`order_id`),
-  ADD KEY `product_id` (`product_id`);
+  ADD KEY `orderItem_fk1` (`product_id`);
 
 --
 -- Indexes for table `product`
@@ -269,6 +280,12 @@ ALTER TABLE `orderitem`
   MODIFY `orderItem_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
@@ -288,14 +305,13 @@ ALTER TABLE `user`
 -- Constraints for table `order`
 --
 ALTER TABLE `order`
-  ADD CONSTRAINT `order_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `order_fk1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
 --
 -- Constraints for table `orderitem`
 --
 ALTER TABLE `orderitem`
-  ADD CONSTRAINT `order_id` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`),
-  ADD CONSTRAINT `product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
+  ADD CONSTRAINT `orderItem_fk1` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
 
 --
 -- Constraints for table `product`
