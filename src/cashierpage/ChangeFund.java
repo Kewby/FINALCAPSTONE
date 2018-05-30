@@ -132,9 +132,9 @@ public class ChangeFund extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        CashierPage cp = new CashierPage(this.getName());
-        cp.getLblUser().setText("Welcome "+this.getName());
-        cp.setVisible(true);
+        AdminPage ap = new AdminPage(this.getName());
+        ap.getLblUser().setText("Welcome "+this.getName());
+        ap.setVisible(true);
         
         this.setVisible(false);
         this.dispose();

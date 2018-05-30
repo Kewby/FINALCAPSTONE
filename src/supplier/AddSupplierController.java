@@ -30,7 +30,6 @@ public class AddSupplierController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-yy");
         
         SupplierModel sm = new SupplierModel();
-        sm.setSupplier_number(as.getTxtSupplierNo().getText().trim());
         sm.setSupplier_name(as.getTxtSupplierName().getText().trim());
         sm.setSupplier_address(as.getTxtAddress().getText().trim());
         sm.setSupplier_email(as.getTxtEmail().getText().trim());
