@@ -22,6 +22,10 @@ public class AddUser extends javax.swing.JFrame {
     AddUserController auc = new AddUserController();
     
     private String name;
+
+    private AddUser() {
+        
+    }
     
     public String getName(){
         return name;
@@ -29,14 +33,8 @@ public class AddUser extends javax.swing.JFrame {
     
     public void setName(String name){
         this.name = name;
-    }
-    
-    public AddUser() {
-        initComponents();
-        
-        this.setLocationRelativeTo(null);
-    }
-    
+    }  
+   
     public AddUser(String name) {
         initComponents();
         
@@ -75,7 +73,7 @@ public class AddUser extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         comboRole = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
@@ -238,10 +236,10 @@ public class AddUser extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("ADD");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        addButton.setText("ADD");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                addButtonActionPerformed(evt);
             }
         });
 
@@ -254,7 +252,6 @@ public class AddUser extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\ProjectPOS\\tanciongs\\images\\add-user (1).png")); // NOI18N
         jLabel5.setText("ADD USER");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -270,7 +267,7 @@ public class AddUser extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)
+                                .addComponent(addButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -288,7 +285,7 @@ public class AddUser extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47))
         );
@@ -312,7 +309,7 @@ public class AddUser extends javax.swing.JFrame {
         txtConfirm.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         if(txtFname.getText().trim().equals("") || txtLname.getText().trim().equals("") 
                 || txtUsername.getText().trim().equals("") || txtPassword.getText().trim().equals("") 
                 || txtConfirm.getText().trim().equals("") || txtEmail.getText().trim().equals("")
@@ -332,7 +329,7 @@ public class AddUser extends javax.swing.JFrame {
         peop.getLblUser().setText("Welcome "+this.getName());
         
         peop.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_addButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         PeoplePage peop = new PeoplePage(this.getName());
@@ -434,10 +431,10 @@ public class AddUser extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
     private javax.swing.JComboBox<String> comboBranch;
     private javax.swing.JComboBox<String> comboRole;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

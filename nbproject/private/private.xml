@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/CapstoneProject/src/models/MyModel.java</file>
+            <file>file:/C:/xampp/htdocs/CapstoneProject/src/user/AddUserController.java</file>
+            <file>file:/C:/xampp/htdocs/CapstoneProject/src/peoplepage/PeoplePageController.java</file>
             <file>file:/C:/xampp/htdocs/CapstoneProject/src/models/UserModel.java</file>
-            <file>file:/C:/xampp/htdocs/CapstoneProject/src/user/UpdateUser.java</file>
+            <file>file:/C:/xampp/htdocs/CapstoneProject/src/user/AddUser.java</file>
             <file>file:/C:/xampp/htdocs/CapstoneProject/src/peoplepage/PeoplePage.java</file>
-            <file>file:/C:/xampp/htdocs/CapstoneProject/src/productpage/ProductPage.java</file>
-            <file>file:/C:/xampp/htdocs/CapstoneProject/src/models/ProductModel.java</file>
         </group>
     </open-files>
 </project-private>

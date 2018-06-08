@@ -51,6 +51,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         BrandName.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        BrandName.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\CapstoneProject\\images\\logo.jpg")); // NOI18N
         BrandName.setText("Tanciong's General Merchandise");
 
         Username.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -85,8 +86,6 @@ public class Login extends javax.swing.JFrame {
                 LoginKeyPressed(evt);
             }
         });
-
-        Logo.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\ProjectPOS\\tanciongs\\images\\logo.jpg")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -133,7 +132,7 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(InputPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

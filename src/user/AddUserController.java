@@ -51,7 +51,20 @@ public class AddUserController {
         
         um.setUser_firstname(au.getTxtFname().getText().trim());
         um.setUser_lastname(au.getTxtLname().getText().trim());
-        
+        um.setUser_email(au.getTxtEmail().getText().trim());
+        um.setUser_contactnumber(au.getTxtContactNo().getText().trim());
+        um.setUser_address(au.getTxtAddress().getText().trim());
+        System.out.println();
+        if(au.getComboBranch().getSelectedItem().toString().compareToIgnoreCase("Cebu")==0){
+            um.setBranch_id(1);
+        }else{
+            um.setBranch_id(2);
+        }
+        if(au.getComboRole().getSelectedItem().toString().compareToIgnoreCase("Admin")==0){
+            um.setIsAdmin(1);
+        }else{
+            um.setIsAdmin(0);
+        }
         
         if (um.add() >= 1) {
             JOptionPane.showMessageDialog(null, "Successfully Added!");

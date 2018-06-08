@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import models.UserModel;
 import net.proteanit.sql.DbUtils;
 import peoplepage.PeoplePage;
+import models.UserModel;
 
 /**
  *
@@ -24,10 +25,17 @@ public class UpdateUser extends javax.swing.JFrame {
     AddUserController auc = new AddUserController();
     
     private String name;
+    private Object TblUser;
+
+    public UpdateUser(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     public String getName(){
         return name;
     }
+    
+    
     
     public void setName(String name){
         this.name = name;
@@ -37,19 +45,21 @@ public class UpdateUser extends javax.swing.JFrame {
         initComponents();
         
         this.setLocationRelativeTo(null);
+        setName(name);        
     }
     
-    public UpdateUser(String name) {
-        initComponents();
+//    public void UpdateUser(String name) {
+//        initComponents();
+//        
+//        this.setLocationRelativeTo(null);
+//        setName(name);
+//        
+//        UserModel um = new UserModel();
+//        ResultSet rs = um.update();
+//        
+//        TblUser.setModel(DbUtils.resultSetToTableModel());
+//    }
         
-        this.setLocationRelativeTo(null);
-        setName(name);
-        
-        UserModel um = new UserModel();
-        ResultSet rs = um.update();
-        
-        tblProduct.setModel(DbUtils.resultSetToTableModel(rs));
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -331,7 +341,7 @@ public class UpdateUser extends javax.swing.JFrame {
         }else {
             if (JOptionPane.showConfirmDialog(null, "Are you sure you want to update this?", "Confirm Adding",
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                auc.add(this);
+                auc.update(this);
             } 
         }
         
@@ -468,4 +478,10 @@ public class UpdateUser extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+    Object getTblUser() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }
+

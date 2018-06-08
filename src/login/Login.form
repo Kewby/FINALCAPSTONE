@@ -100,7 +100,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="Login" min="-2" pref="40" max="-2" attributes="0"/>
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -110,6 +110,9 @@
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="24" style="1"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="C:\xampp\htdocs\CapstoneProject\images\logo.jpg"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Tanciong&apos;s General Merchandise"/>
           </Properties>
@@ -157,11 +160,6 @@
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="Logo">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\xampp\htdocs\ProjectPOS\tanciongs\images\logo.jpg"/>
-            </Property>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

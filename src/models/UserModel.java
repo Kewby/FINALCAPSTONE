@@ -99,15 +99,39 @@ public class UserModel extends MyModel {
         Statement st;
         int ret = 0;
         this.initialize();
-        String str = "INSERT into USER values (null, '"+this.user_firstname+"','"+this.user_lastname+"', '"+this.username+"','"+this.password+"', '"+this.user_email+"','"+this.user_contactnumber+"', '"+this.user_address+"', '"+this.branch_id+"', '"+this.isAdmin+"' 0)";
-          
+        String str = "INSERT INTO `user` (`user_id`, `user_firstname`, `user_lastname`, `username`, `password`, `user_email`, `user_contactnumber`, `user_address`, `branch_id`, `isAdmin`, `deleteStatus`) values (null, '"+this.user_firstname+"', '"+this.user_lastname+"', '"+this.username+"','"+this.password+"', '"+this.user_email+"', '"+this.user_contactnumber+"', '"+this.user_address+"', '"+this.branch_id+"', '"+this.isAdmin+"', 0)";
         
         try {
             st = conn.prepareStatement(str);
             ret = st.executeUpdate(str);
+            ret  = 1;
         } catch (SQLException ex) {
         }
         
+        return ret;
+    }
+    
+    public int update (){
+        Statement st;
+        int ret = 0;
+        this.initialize(); //initialize db
+        
+        String str = "UPDATE `user` SET `user_firstname`='"+this.user_firstname+"',"
+                + "`user_lastname`='"+this.user_lastname+"',"
+                + "`username`='"+this.username+"',"
+                + "`password`='"+this.password+"',"
+                + "`user_email`='"+this.user_email+"',"
+                + "`user_contactnumber`='"+this.user_contactnumber+"',"
+                + "`user_address`='"+this.user_address+"',"
+                + "`branch_id`='"+this.branch_id+"',"
+                + "`isAdmin`='"+this.isAdmin+"',"
+                + "`deleteStatus`='"+this.deleteStatus+"'";
+        try {
+            st = conn.createStatement();
+            ret = st.executeUpdate(str);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return ret;
     }
     
@@ -177,7 +201,7 @@ public class UserModel extends MyModel {
     }
     
     public void setUser_email(String user_email){
-        this.user_address = user_email;    
+        this.user_email = user_email;    
     }
     
     public String getUser_contactnumber() {
