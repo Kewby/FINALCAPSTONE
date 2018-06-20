@@ -5,6 +5,10 @@
  */
 package productpage;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -40,9 +44,18 @@ public class AddProduct extends javax.swing.JFrame {
     
     public AddProduct(String name) {
         initComponents();
-        
+        ResultSet rs = null;
         this.setLocationRelativeTo(null);
         setName(name);
+        
+        rs = apc.getCategories();
+        try {
+            while (rs.next()) {
+                comboCategory.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -61,16 +74,12 @@ public class AddProduct extends javax.swing.JFrame {
         lblProdtype = new javax.swing.JLabel();
         lblCategory = new javax.swing.JLabel();
         lblPrice = new javax.swing.JLabel();
-        lblStock = new javax.swing.JLabel();
-        txtItemCode = new javax.swing.JLabel();
         txtProductName = new javax.swing.JTextField();
-        comboCategory = new javax.swing.JComboBox<>();
         comboProductType = new javax.swing.JComboBox<>();
+        comboCategory = new javax.swing.JComboBox<>();
         txtPrice = new javax.swing.JTextField();
-        txtStock = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        lblSubCategory = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtItemCode = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -96,19 +105,18 @@ public class AddProduct extends javax.swing.JFrame {
         lblPrice.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblPrice.setText("Price:");
 
-        lblStock.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblStock.setText("Stock:");
-
-        txtItemCode.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtItemCode.setText("jLabel7");
-
         txtProductName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        comboCategory.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        comboCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT TYPE", "AGRICULTURE", "NON-AGRICULTURE" }));
-
         comboProductType.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        comboProductType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT CATEGORY", "ALCOHOL", "PRODUCE", "MEAT", "BEVERAGES", "SUPPLIMENTS", "HOUSEHOLD PRODUCTS", "BAKING PRODUCTS", "PERSONAL CARE", "PAPER PRODUCTS", "SNACKS", "FROZEN FOOD", "CONDIMENTS" }));
+        comboProductType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT TYPE", "AGRICULTURE", "NON-AGRICULTURE" }));
+
+        comboCategory.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        comboCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT CATEGORY" }));
+        comboCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCategoryActionPerformed(evt);
+            }
+        });
 
         txtPrice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtPrice.addActionListener(new java.awt.event.ActionListener() {
@@ -117,15 +125,9 @@ public class AddProduct extends javax.swing.JFrame {
             }
         });
 
-        txtStock.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        lblSubCategory.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblSubCategory.setText("Sub-Category:");
-
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PORK", "BEEF", "POULTRY", "SEAFOOD", "DELI PRODUCTS" }));
+        txtItemCode.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -135,21 +137,17 @@ public class AddProduct extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblCategory)
-                    .addComponent(lblSubCategory)
                     .addComponent(lblProdtype)
                     .addComponent(lblProductName)
                     .addComponent(lblItemCode)
-                    .addComponent(lblPrice)
-                    .addComponent(lblStock))
+                    .addComponent(lblPrice))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtProductName)
-                    .addComponent(comboCategory, 0, 278, Short.MAX_VALUE)
-                    .addComponent(comboProductType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtItemCode, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comboProductType, 0, 280, Short.MAX_VALUE)
+                    .addComponent(comboCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtPrice)
-                    .addComponent(txtStock))
+                    .addComponent(txtItemCode))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addGap(46, 46, 46))
@@ -157,10 +155,10 @@ public class AddProduct extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblItemCode)
-                    .addComponent(txtItemCode))
+                    .addComponent(txtItemCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblProductName)
@@ -168,26 +166,18 @@ public class AddProduct extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblProdtype)
-                    .addComponent(comboCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboProductType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboProductType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCategory))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSubCategory)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPrice))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblStock))
-                .addGap(34, 34, 34)
+                .addGap(123, 123, 123)
                 .addComponent(jLabel8)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
@@ -222,19 +212,18 @@ public class AddProduct extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addGap(41, 41, 41))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addContainerGap(372, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addGap(0, 362, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addGap(43, 43, 43))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,12 +232,12 @@ public class AddProduct extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(74, 74, 74))
+                .addGap(144, 144, 144))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -259,7 +248,7 @@ public class AddProduct extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -270,25 +259,24 @@ public class AddProduct extends javax.swing.JFrame {
         prp.getLblUser().setText("Welcome "+this.getName());
 
         prp.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (txtItemCode.getText().trim().equals("") || txtProductName.getText().trim().equals("")
-            || comboCategory.getSelectedItem().equals("") || comboProductType.getSelectedItem().equals("")
-            || txtPrice.getText().trim().equals("") || txtStock.getText().trim().equals("")) {
+            || comboProductType.getSelectedItem().equals("") || comboCategory.getSelectedItem().equals("")
+            || txtPrice.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Failed! Please fill up!");
         }else {
             if (JOptionPane.showConfirmDialog(null, "Are you sure you want to add this?", "Confirm Adding",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             apc.add(this);
-        }
+        } 
         }
 
         ProductPage prp = new ProductPage(this.getName());
         prp.getLblUser().setText("Welcome "+this.getName());
 
-        prp.setVisible(true);
+//        prp.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -298,6 +286,10 @@ public class AddProduct extends javax.swing.JFrame {
     private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPriceActionPerformed
+
+    private void comboCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCategoryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboCategoryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -334,7 +326,7 @@ public class AddProduct extends javax.swing.JFrame {
         });
     }
     
-    public JLabel getTxtItemCode(){
+    public JTextField getTxtItemCode(){
         return txtItemCode;
     }
     
@@ -343,20 +335,17 @@ public class AddProduct extends javax.swing.JFrame {
     }
 
     public JComboBox getcomboCategory() {
-        return comboCategory;
+        return comboProductType;
     }
 
     public JComboBox getcomboProductType() {
-        return comboProductType;
+        return comboCategory;
     }
     
     public JTextField getTxtPrice() {
         return txtPrice;
     }
 
-    public JTextField getTxtStock() {
-        return txtStock;
-    }
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -365,7 +354,6 @@ public class AddProduct extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
@@ -375,12 +363,9 @@ public class AddProduct extends javax.swing.JFrame {
     private javax.swing.JLabel lblPrice;
     private javax.swing.JLabel lblProdtype;
     private javax.swing.JLabel lblProductName;
-    private javax.swing.JLabel lblStock;
-    private javax.swing.JLabel lblSubCategory;
-    private javax.swing.JLabel txtItemCode;
+    private javax.swing.JTextField txtItemCode;
     private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtProductName;
-    private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
 
     Object getcomboUnit() {

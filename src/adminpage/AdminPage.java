@@ -75,14 +75,13 @@ public class AdminPage extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         BrandName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        BrandName.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\CapstoneProject\\images\\logo2.jpg")); // NOI18N
         BrandName.setText("Tanciong's General Merchandise");
 
         lblUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblUser.setText("Hello, ");
 
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\CapstoneProject\\images\\exit.png")); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\Tanciongs_POS\\tanciongs\\images\\exit.png")); // NOI18N
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -116,13 +115,15 @@ public class AdminPage extends javax.swing.JFrame {
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton4.setText("REPORTS");
 
-        iconCashier.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\CapstoneProject\\images\\cashier.png")); // NOI18N
+        Logo.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\Tanciongs_POS\\tanciongs\\images\\logo2.jpg")); // NOI18N
 
-        iconProduct.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\CapstoneProject\\images\\product.png")); // NOI18N
+        iconCashier.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\Tanciongs_POS\\tanciongs\\images\\cashier.png")); // NOI18N
 
-        iconPeople.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\CapstoneProject\\images\\people.png")); // NOI18N
+        iconProduct.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\Tanciongs_POS\\tanciongs\\images\\product.png")); // NOI18N
 
-        iconReports.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\CapstoneProject\\images\\reports.png")); // NOI18N
+        iconPeople.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\Tanciongs_POS\\tanciongs\\images\\people.png")); // NOI18N
+
+        iconReports.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\Tanciongs_POS\\tanciongs\\images\\reports.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -151,30 +152,37 @@ public class AdminPage extends javax.swing.JFrame {
                         .addComponent(iconReports)))
                 .addGap(140, 140, 140))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(BrandName))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addComponent(iconCashier)))
+                .addGap(176, 176, 176)
+                .addComponent(iconCashier)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Logo)
+                .addGap(4, 4, 4)
+                .addComponent(BrandName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(92, 92, 92))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(Logo)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 582, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(642, Short.MAX_VALUE)
+                    .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(BrandName)
-                .addGap(97, 97, 97)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(BrandName))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Logo)))
+                .addGap(64, 64, 64)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(iconReports, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(iconProduct, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -186,17 +194,12 @@ public class AdminPage extends javax.swing.JFrame {
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(Logo)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(lblUser)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(319, Short.MAX_VALUE)))
+                    .addComponent(lblUser)
+                    .addContainerGap(397, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

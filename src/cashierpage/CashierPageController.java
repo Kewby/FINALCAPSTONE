@@ -33,13 +33,12 @@ public class CashierPageController {
             while (rs.next()) {
                 row = new Vector();
                 
-                row.add(rs.getInt("product_id"));
-                row.add(rs.getString("product_number"));
+                row.add(rs.getString("product_code"));
                 row.add(rs.getString("product_name"));
-                row.add(rs.getString("product_category"));
+                row.add(rs.getString("category_id"));
+                row.add(rs.getString("product_type"));
                 row.add(rs.getString("product_price"));
-                row.add(rs.getString("product_stock"));
-                row.add(rs.getString("product_image"));
+                row.add(rs.getString("branch_id"));
                 
                 dm.addRow(row);
             }

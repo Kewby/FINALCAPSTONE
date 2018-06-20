@@ -6,7 +6,7 @@
 package adminpage;
 
 //import function.Temp;
-import models.UserModel;
+import models.EmployeeModel;
 
 /**
  *
@@ -15,9 +15,9 @@ import models.UserModel;
 public class AdminPageController {
 
     public void deleteUser(int id) {
-        UserModel um = new UserModel();
-        um.setUser_id(id);
-        int ret = um.delete();
+        EmployeeModel em = new EmployeeModel();
+        em.setEmployee_id(id);
+        int ret = em.delete();
     }
 }
     

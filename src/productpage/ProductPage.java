@@ -13,11 +13,11 @@ import login.Login;
 import adminpage.AdminPage;
 import adminpage.AdminPageController;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.regex.PatternSyntaxException;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import net.proteanit.sql.DbUtils;
-import user.AddUser;
 import models.ProductModel;
 
 /**
@@ -32,7 +32,7 @@ public class ProductPage extends javax.swing.JFrame {
     AdminPageController apc = new AdminPageController();
     
     private String name;
-    Object getTblProduct;
+//    Object getTblProduct;
     
     public String getName(){
         return name;
@@ -56,6 +56,15 @@ public class ProductPage extends javax.swing.JFrame {
         
         ProductModel pm = new ProductModel();
         ResultSet rs = pm.viewAll();
+        String val = pm.determineBranch(name);
+        
+         if(val.compareTo("1")==0){
+            comboBranch.setSelectedIndex(0);
+            rs = pm.viewLeyte("1");
+        }else{
+            comboBranch.setSelectedIndex(1);
+            rs = pm.viewLeyte("2");
+        }
         
         tblProduct.setModel(DbUtils.resultSetToTableModel(rs));
     }
@@ -82,13 +91,13 @@ public class ProductPage extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        searchProduct = new javax.swing.JTextField();
+        comboBranch = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         BrandName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        BrandName.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\CapstoneProject\\images\\logo2.jpg")); // NOI18N
         BrandName.setText("Tanciong's General Merchandise");
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -151,13 +160,32 @@ public class ProductPage extends javax.swing.JFrame {
 
         btnUpdate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnUpdate.setText("UPDATE");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("SEARCH:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cebu Branch", "Leyte Branch" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        searchProduct.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchProductKeyReleased(evt);
+            }
+        });
+
+        comboBranch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cebu Branch", "Leyte Branch" }));
+        comboBranch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                comboBranchActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("REFRESH");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -171,10 +199,12 @@ public class ProductPage extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminInventoryLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAdd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnUpdate)
@@ -187,16 +217,16 @@ public class ProductPage extends javax.swing.JFrame {
             AdminInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AdminInventoryLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(AdminInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(AdminInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnDelete)
-                        .addComponent(btnAdd)
-                        .addComponent(btnUpdate)
-                        .addComponent(jLabel1)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jComboBox1))
+                .addGroup(AdminInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDelete)
+                    .addComponent(btnAdd)
+                    .addComponent(btnUpdate)
+                    .addComponent(jLabel1)
+                    .addComponent(searchProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBranch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -282,12 +312,62 @@ public class ProductPage extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         AddProduct ap = new AddProduct(this.getName());
         ap.setVisible(true);
-        this.dispose();
+        
     }//GEN-LAST:event_btnAddActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void searchProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProductKeyReleased
+       DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel> (model);
+        tblProduct.setRowSorter(tr);
+        try {
+            tr.setRowFilter(RowFilter.regexFilter("(?i)"+searchProduct.getText()));
+        } catch (PatternSyntaxException e) {
+            
+        }
+    }//GEN-LAST:event_searchProductKeyReleased
+
+    private void comboBranchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBranchActionPerformed
+        ProductModel pm = new ProductModel();
+        ResultSet rs = null;
+        
+        if(comboBranch.getSelectedItem().toString().compareTo("Cebu Branch")==0){
+            rs = pm.viewLeyte("1");
+        }else{
+            rs = pm.viewLeyte("2");
+        }
+        
+        tblProduct.setModel(DbUtils.resultSetToTableModel(rs)); 
+
+        DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel> (model);
+        tblProduct.setRowSorter(tr);
+        try {
+            tr.setRowFilter(RowFilter.regexFilter("(?i)"+searchProduct.getText()));
+        } catch (PatternSyntaxException e) {
+            
+        }
+    }//GEN-LAST:event_comboBranchActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        UpdateProduct update = new UpdateProduct(this.getName(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 0).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 1).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 2).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 3).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 4).toString());
+        update.setVisible(true);
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ProductModel pm = new ProductModel();
+        ResultSet rs = null;
+        String val = pm.determineBranch(name);
+        
+         if(val.compareTo("1")==0){
+            comboBranch.setSelectedIndex(0);
+            rs = pm.viewLeyte("1");
+        }else{
+            comboBranch.setSelectedIndex(1);
+            rs = pm.viewLeyte("2");
+        }
+        
+        tblProduct.setModel(DbUtils.resultSetToTableModel(rs));
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -348,13 +428,14 @@ public class ProductPage extends javax.swing.JFrame {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox<String> comboBranch;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblUser;
+    private javax.swing.JTextField searchProduct;
     private javax.swing.JTable tblProduct;
     // End of variables declaration//GEN-END:variables
 

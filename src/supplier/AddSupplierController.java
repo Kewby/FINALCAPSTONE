@@ -8,7 +8,7 @@ package supplier;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import models.SupplierModel;
-import models.UserModel;
+import models.EmployeeModel;
 
 /**
  *

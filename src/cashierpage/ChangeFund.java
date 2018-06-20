@@ -133,7 +133,7 @@ public class ChangeFund extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         CashierPage cp = new CashierPage(this.getName());
-        cp.getLblUser().setText("Welcome "+this.getName());
+        
         cp.setVisible(true);
         
         this.setVisible(false);

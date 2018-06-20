@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import models.UserModel;
+import models.EmployeeModel;
 import adminpage.AdminPage;
 import models.ProductModel;
 
@@ -20,12 +20,13 @@ import models.ProductModel;
  * @author Client
  */
 public class PeoplePageController {
-    public void deleteUser(String user_firstname){
-        UserModel um = new UserModel();
+    
+    public void deleteEmp(String employee_firstname){
+        EmployeeModel em = new EmployeeModel();
          
-        um.setUser_firtname(user_firstname);
+        em.setEmployee_firstname(employee_firstname);
          
-        if (um.delete() == 1){
+        if (em.delete() == 1){
              JOptionPane.showMessageDialog(null, "Successfully Deleted!");
          } else {
              JOptionPane.showMessageDialog(null, "Failed!");

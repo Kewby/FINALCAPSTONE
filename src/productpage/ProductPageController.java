@@ -49,8 +49,6 @@ public class ProductPageController {
                 
                 //dm.addRow(row);
             }
-            
-            
         } catch (Exception ex) {
             Logger.getLogger (ProductPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -68,6 +66,8 @@ public class ProductPageController {
              JOptionPane.showMessageDialog(null, "Failed!");
          }
      }
+     
+     
 
     
 }
