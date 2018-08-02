@@ -23,6 +23,7 @@ import net.proteanit.sql.DbUtils;
 import supplier.AddSupplier;
 import employee.AddEmp;
 import employee.UpdateEmp;
+import productpage.UpdateProduct;
 
 /**
  *
@@ -59,7 +60,7 @@ public class PeoplePage extends javax.swing.JFrame {
         
         EmployeeModel em = new EmployeeModel();
         SupplierModel sm = new SupplierModel();
-        ResultSet rs = null;
+        ResultSet rs = em.viewAll(); //null;
         ResultSet rs2 = sm.viewAll();
         
         String val = em.determineBranch(name);
@@ -445,8 +446,8 @@ public class PeoplePage extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBranchActionPerformed
 
     private void UpdateEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateEmpActionPerformed
-        UpdateEmp upem = new UpdateEmp(this.getName());
-        upem.setVisible(true);
+        UpdateEmp ue = new UpdateEmp(this.getName());
+        ue.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_UpdateEmpActionPerformed
 

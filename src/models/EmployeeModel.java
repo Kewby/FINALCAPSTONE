@@ -116,17 +116,18 @@ public class EmployeeModel extends MyModel {
         Statement st;
         int ret = 0;
         this.initialize(); //initialize db
+       
         
-        String str = "UPDATE `employee` SET `employee_firstname`='"+this.employee_firstname+"',"
-                + "`employee_lastname`='"+this.employee_lastname+"',"
-                + "`username`='"+this.username+"',"
-                + "`password`='"+this.password+"',"
-                + "`employee_email`='"+this.employee_email+"',"
-                + "`employee_contactnumber`='"+this.employee_contactnumber+"',"
-                + "`employee_address`='"+this.employee_address+"',"
-                + "`branch_id`='"+this.branch_id+"',"
-                + "`isAdmin`='"+this.isAdmin+"',"
-                + "`deleteStatus`='"+this.deleteStatus+"'";
+         String str = "UPDATE `employee` SET `employee_firstname`= '"+this.employee_firstname+"', "
+                + " `employee_lastname` = '"+this.employee_lastname+"', "
+                + " `username` = '"+this.username+"', "
+                + " `password` = '"+this.password+"', "
+                + " `employee_email` = '"+this.employee_email+"', "
+                + " `employee_contactnumber` = '"+this.employee_contactnumber+"', "
+                + " `employee_address` = '"+this.employee_address+"', "
+                + " `isAdmin` = '"+this.isAdmin+"', "
+                + " `deleteStatus` = '"+this.deleteStatus+"'";
+        
         
         try {
             st = conn.createStatement();
@@ -237,6 +238,10 @@ public class EmployeeModel extends MyModel {
     
     public void setBranch_id(int branch_id){
         this.branch_id = branch_id;
+    }
+
+    public void isAdmin(int role) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

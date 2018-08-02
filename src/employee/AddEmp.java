@@ -22,7 +22,6 @@ public class AddEmp extends javax.swing.JFrame {
     AddEmpController aec = new AddEmpController();
     
     private String name;
-    
     private AddEmp(){
         
     }

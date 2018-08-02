@@ -6,16 +6,17 @@
 package adminpage;
 
 import cashierpage.ChangeFund;
+import delivery.Delivery;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import login.Login;
 import peoplepage.PeoplePage;
 import productpage.ProductPage;
-import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author 
+ * @author
  */
 public class AdminPage extends javax.swing.JFrame {
 
@@ -46,7 +47,7 @@ public class AdminPage extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         setName(name);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,16 +60,17 @@ public class AdminPage extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         BrandName = new javax.swing.JLabel();
         lblUser = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
+        btnCashier = new javax.swing.JButton();
+        btnProducts = new javax.swing.JButton();
+        btnPeople = new javax.swing.JButton();
+        btnReports = new javax.swing.JButton();
         Logo = new javax.swing.JLabel();
         iconCashier = new javax.swing.JLabel();
         iconProduct = new javax.swing.JLabel();
         iconPeople = new javax.swing.JLabel();
         iconReports = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,40 +82,40 @@ public class AdminPage extends javax.swing.JFrame {
         lblUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblUser.setText("Hello, ");
 
-        jButton6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\Tanciongs_POS\\tanciongs\\images\\exit.png")); // NOI18N
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnLogout.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnLogout.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\Tanciongs_POS\\tanciongs\\images\\exit.png")); // NOI18N
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnLogoutActionPerformed(evt);
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setText("CASHIER");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCashier.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnCashier.setText("CASHIER");
+        btnCashier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCashierActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setText("PRODUCTS");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnProducts.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnProducts.setText("PRODUCTS");
+        btnProducts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnProductsActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton3.setText("PEOPLE");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnPeople.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnPeople.setText("PEOPLE");
+        btnPeople.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnPeopleActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton4.setText("REPORTS");
+        btnReports.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnReports.setText("REPORTS");
 
         Logo.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\Tanciongs_POS\\tanciongs\\images\\logo2.jpg")); // NOI18N
 
@@ -125,32 +127,17 @@ public class AdminPage extends javax.swing.JFrame {
 
         iconReports.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\Tanciongs_POS\\tanciongs\\images\\reports.png")); // NOI18N
 
+        jButton1.setText("DELIVERY");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(150, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(iconProduct)
-                        .addGap(26, 26, 26)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(iconPeople)
-                        .addGap(63, 63, 63)
-                        .addComponent(iconReports)))
-                .addGap(140, 140, 140))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(176, 176, 176)
                 .addComponent(iconCashier)
@@ -161,8 +148,33 @@ public class AdminPage extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addComponent(BrandName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(150, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnCashier)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnProducts))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(iconProduct)
+                                .addGap(26, 26, 26)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(btnPeople)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnReports))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(iconPeople)
+                                .addGap(63, 63, 63)
+                                .addComponent(iconReports)))))
+                .addGap(140, 140, 140))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap(642, Short.MAX_VALUE)
@@ -178,7 +190,7 @@ public class AdminPage extends javax.swing.JFrame {
                         .addComponent(BrandName))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(Logo)))
@@ -190,11 +202,13 @@ public class AdminPage extends javax.swing.JFrame {
                     .addComponent(iconPeople, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(113, Short.MAX_VALUE))
+                    .addComponent(btnCashier, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPeople, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReports, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -216,39 +230,57 @@ public class AdminPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         Login l = new Login();
         l.setVisible(true);
         
         this.dispose();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ChangeFund cf = new CashFund(this.getName());
+    private void btnCashierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCashierActionPerformed
+        ChangeFund cf = new ChangeFund(this.getName());
         cf.getLblUser().setText("Welcome "+this.getName());
+        cf.setName(this.getName());
+        
         cf.setVisible(true);
-
-        this.setVisible(false);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        cf.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnCashierActionPerformed
+
+    private void btnProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductsActionPerformed
         ProductPage prp = new ProductPage(this.getName());
         prp.getLblUser().setText("Welcome "+this.getName());
+        
         prp.setVisible(true);
-
-        this.setVisible(false);
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+        
+        prp.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        
+    }//GEN-LAST:event_btnProductsActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnPeopleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPeopleActionPerformed
         PeoplePage peop = new PeoplePage(this.getName());
         peop.getLblUser().setText("Welcome "+this.getName());
+        
         peop.setVisible(true);
-
-        this.setVisible(false);
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+        
+        peop.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        
+    }//GEN-LAST:event_btnPeopleActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Delivery d = new Delivery(this.getName());
+        d.setVisible(true);
+        this.dispose();
+        
+        d.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -307,15 +339,16 @@ public class AdminPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BrandName;
     private javax.swing.JLabel Logo;
+    private javax.swing.JButton btnCashier;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnPeople;
+    private javax.swing.JButton btnProducts;
+    private javax.swing.JButton btnReports;
     private javax.swing.JLabel iconCashier;
     private javax.swing.JLabel iconPeople;
     private javax.swing.JLabel iconProduct;
     private javax.swing.JLabel iconReports;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblUser;
     // End of variables declaration//GEN-END:variables
@@ -323,10 +356,5 @@ public class AdminPage extends javax.swing.JFrame {
     Object getTblProduct() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    private static class CashFund extends ChangeFund {
-
-        public CashFund(String name) {
-        }
-    }
+    
 }

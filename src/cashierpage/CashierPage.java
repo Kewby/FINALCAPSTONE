@@ -19,6 +19,7 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import login.Login;
+import models.SalesModel;
 import net.proteanit.sql.DbUtils;
 import productpage.ProductPage;
 import productpage.ProductPageController;
@@ -56,6 +57,8 @@ public class CashierPage extends javax.swing.JFrame {
         
         this.setLocationRelativeTo(null);
         setName(name);
+        
+        SalesModel salesm = new SalesModel();
     }
 
     /**
@@ -77,19 +80,21 @@ public class CashierPage extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        btnSelectItem = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        searchItem = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCart = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        lblNumberItem = new javax.swing.JLabel();
+        lblItems = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        btnPayment = new javax.swing.JButton();
         btnView = new javax.swing.JButton();
         btnPrint = new javax.swing.JButton();
+        btnCheckout = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        lblUser = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -158,17 +163,19 @@ public class CashierPage extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnSelectItem.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\ProjectPOS\\tanciongs\\images\\plus_2.png")); // NOI18N
-        btnSelectItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSelectItemActionPerformed(evt);
-            }
-        });
-
         btnRemove.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\ProjectPOS\\tanciongs\\images\\x_2.png")); // NOI18N
         btnRemove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoveActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("SEARCH:");
+
+        searchItem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                searchItemKeyPressed(evt);
             }
         });
 
@@ -177,19 +184,28 @@ public class CashierPage extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSelectItem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addComponent(searchItem, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSelectItem)
-                    .addComponent(btnRemove))
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(searchItem)
+                        .addGap(1, 1, 1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnRemove)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -205,7 +221,7 @@ public class CashierPage extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblNumberItem.setText("0");
+        lblItems.setText("0");
 
         jLabel8.setText("Item(s)");
 
@@ -215,7 +231,7 @@ public class CashierPage extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addComponent(lblNumberItem)
+                .addComponent(lblItems)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
                 .addContainerGap(733, Short.MAX_VALUE))
@@ -225,18 +241,18 @@ public class CashierPage extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNumberItem)
+                    .addComponent(lblItems)
                     .addComponent(jLabel8))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnPayment.setText("Payment");
-
         btnView.setText("View Receipt");
 
         btnPrint.setText("Print Receipt");
+
+        btnCheckout.setText("Checkout");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -247,9 +263,9 @@ public class CashierPage extends javax.swing.JFrame {
                 .addComponent(btnView)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnPrint)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 416, Short.MAX_VALUE)
-                .addComponent(btnPayment)
-                .addGap(129, 129, 129))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCheckout)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,11 +274,11 @@ public class CashierPage extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnView)
                     .addComponent(btnPrint)
-                    .addComponent(btnPayment))
+                    .addComponent(btnCheckout))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton7.setText("LOG OFF");
+        jButton7.setText("LOGOUT");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -275,6 +291,8 @@ public class CashierPage extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        lblUser.setText("jLabel2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -296,6 +314,8 @@ public class CashierPage extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(BrandName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblUser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton7)))
                 .addContainerGap())
         );
@@ -305,18 +325,19 @@ public class CashierPage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton7)
-                    .addComponent(BrandName))
+                    .addComponent(BrandName)
+                    .addComponent(lblUser))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(Total, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(ItemPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addComponent(jButton1))
-                .addGap(105, 105, 105)
+                .addGap(30, 30, 30)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -327,7 +348,7 @@ public class CashierPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-        int row = tblCart.getSelectedRow();
+        /*int row = tblCart.getSelectedRow();
         int column = tblCart.getSelectedColumn();
         String val = tblCart.getModel().getValueAt(row,2).toString();
         System.out.println(val);
@@ -337,22 +358,16 @@ public class CashierPage extends javax.swing.JFrame {
         float new_val = curr_val - remove;
         lblTotal.setText(String.valueOf(new_val));
         cpc.remove(this);
+        */
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         Login l = new Login();
         l.setVisible(true);
         
+        this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void btnSelectItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectItemActionPerformed
-        SelectItem sel = new SelectItem(this.getName());
-        sel.setVisible(true);
-
-//        this.setVisible(false);
-//        this.dispose();
-    }//GEN-LAST:event_btnSelectItemActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         AdminPage ap = new AdminPage(this.getName());
@@ -362,6 +377,10 @@ public class CashierPage extends javax.swing.JFrame {
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void searchItemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchItemKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchItemKeyPressed
 
     /**
      * @param args the command line arguments
@@ -397,18 +416,26 @@ public class CashierPage extends javax.swing.JFrame {
             }
         });
     }
+    
+    public JLabel getLblUser() {
+        return lblUser;
+    }
+    
+    public JTable getTblCart(){
+        return tblCart;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BrandName;
     private javax.swing.JPanel ItemPrice;
     private javax.swing.JPanel Total;
-    private javax.swing.JButton btnPayment;
+    private javax.swing.JButton btnCheckout;
     private javax.swing.JButton btnPrint;
     private javax.swing.JButton btnRemove;
-    private javax.swing.JButton btnSelectItem;
     private javax.swing.JButton btnView;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton7;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
@@ -419,17 +446,83 @@ public class CashierPage extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblItemName;
     private javax.swing.JLabel lblItemPrice;
-    private javax.swing.JLabel lblNumberItem;
+    private javax.swing.JLabel lblItems;
     private javax.swing.JLabel lblTotal;
+    private javax.swing.JLabel lblUser;
+    private javax.swing.JTextField searchItem;
     private javax.swing.JTable tblCart;
     // End of variables declaration//GEN-END:variables
 
-//    public JLabel getLblUser() {
-//        return lblUser;
+
+/*    
+MOVE TO SALES MODEL    
+public JTable getTblCart() {
+        return tblCart;
+    }
+
+public JLabel getLblItemPrice() {
+        return lblItemPrice;
+    }
+
+public JLabel getLblTotal() {
+        return lblTotal;
+    }
+
+public JLabel getLblItems() {
+        return lblItems;
+    }
+
+public int getQty(){
+    return qty;
+}
+
+public void setQty(int qty){
+    this.qty = qty;
+}
+
+public String getItemName(){
+    return itemName;
+}
+
+public void setItemName(String itemName){
+    this.itemName = itemName;
+}
+
+public float getPrice(){
+    return price;
+}
+
+public void setPrice(float price){
+    this.price = price;
+}
+
+public float getSubtotal(){
+    return subtotal;
+}
+
+public void setSubtotal(float subtotal){
+    this.subtotal = subtotal;
+}
+
+public String getTxtSearch(){
+    return txtSearch;
+}
+
+public void setTxtString(String txtSearch){
+    this.txtSearch = txtSearch;
+}
+
+*/
+
+
+
+    
+//public int getBranch_id() {
+//        return branch_id;
+//    }
+//
+//    public void setBranch_id(int product_id) {
+//        this.branch_id = product_id;
 //    }
     
-    public JTable getTblProduct(){  
-        JTable tblProduct = null;
-        return tblProduct;
-    }
 }

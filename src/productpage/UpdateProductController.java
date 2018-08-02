@@ -22,7 +22,7 @@ public class UpdateProductController {
         updc.getTxtProductName().setText("");
         updc.getcomboCategory().setSelectedIndex(0);
         updc.getcomboProductType().setSelectedIndex(0);
-        updc.getTxtPrice().setText("");
+        updc.getTxtStandardCost().setText("");
         updc.getTxtItemCode().requestFocus();
     }
 
@@ -34,11 +34,14 @@ public class UpdateProductController {
         
         pm.setProduct_code(updc.getTxtItemCode().getText().trim());
         pm.setProduct_name(updc.getTxtProductName().getText().trim());
-        pm.setProduct_category(pm.determineCategory(updc.getcomboProductType().getSelectedItem().toString()));
+        pm.setProduct_category(pm.determineCategory(updc.getcomboCategory().getSelectedItem().toString()));
         System.out.print("Category ID: "+pm.getProduct_category());
+        
         productType = (updc.getcomboProductType().getSelectedItem().toString().compareToIgnoreCase("AGRICULTURE")==0)?1:0;
         pm.setProduct_type(productType);
-        pm.setProduct_price(Float.parseFloat(updc.getTxtPrice().getText().trim()));
+        
+        pm.setStandard_cost(Float.parseFloat(updc.getTxtStandardCost().getText().trim()));
+        pm.setMarkup_cost(Float.parseFloat(updc.getTxtMarkupCost().getText().trim()));
         pm.setBranch_id(Integer.parseInt(pm.determineBranch(updc.getName()))); //determines which branch the product will be added
 
         if (pm.update() >= 1) {

@@ -20,9 +20,11 @@ import models.ProductModel;
  */
 public class ProductPageController {
     
+    
+    
      public ResultSet test(){
-         ProductModel pm = new ProductModel();
-            ResultSet rs = pm.viewAll();
+        ProductModel pm = new ProductModel();
+        ResultSet rs = pm.viewAll();
             
             return rs;
      }
@@ -44,8 +46,8 @@ public class ProductPageController {
                 row.add(rs.getInt("product_name"));
                 row.add(rs.getInt("product_category"));
                 row.add(rs.getInt("product_type"));
-                row.add(rs.getInt("product_price"));
-                row.add(rs.getInt("product_stock"));
+                row.add(rs.getInt("list_price"));
+                //row.add(rs.getInt("product_stock"));
                 
                 //dm.addRow(row);
             }
@@ -65,9 +67,7 @@ public class ProductPageController {
          } else {
              JOptionPane.showMessageDialog(null, "Failed!");
          }
-     }
-     
-     
+     }    
 
     
 }

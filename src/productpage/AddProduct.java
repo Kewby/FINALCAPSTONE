@@ -68,18 +68,20 @@ public class AddProduct extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        addForm = new javax.swing.JPanel();
         lblItemCode = new javax.swing.JLabel();
-        lblProductName = new javax.swing.JLabel();
-        lblProdtype = new javax.swing.JLabel();
-        lblCategory = new javax.swing.JLabel();
-        lblPrice = new javax.swing.JLabel();
-        txtProductName = new javax.swing.JTextField();
-        comboProductType = new javax.swing.JComboBox<>();
-        comboCategory = new javax.swing.JComboBox<>();
-        txtPrice = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
         txtItemCode = new javax.swing.JTextField();
+        lblProductName = new javax.swing.JLabel();
+        txtProductName = new javax.swing.JTextField();
+        lblProdtype = new javax.swing.JLabel();
+        comboProductType = new javax.swing.JComboBox<>();
+        lblCategory = new javax.swing.JLabel();
+        comboCategory = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        lblStandardCost = new javax.swing.JLabel();
+        txtStandardCost = new javax.swing.JTextField();
+        lblMarkupcost = new javax.swing.JLabel();
+        txtMarkupCost = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -93,22 +95,26 @@ public class AddProduct extends javax.swing.JFrame {
         lblItemCode.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblItemCode.setText("Item Code:");
 
+        txtItemCode.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtItemCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtItemCodeActionPerformed(evt);
+            }
+        });
+
         lblProductName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblProductName.setText("Product Name:");
+
+        txtProductName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         lblProdtype.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblProdtype.setText("Product Type:");
 
-        lblCategory.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblCategory.setText("Category:");
-
-        lblPrice.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblPrice.setText("Price:");
-
-        txtProductName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         comboProductType.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         comboProductType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT TYPE", "AGRICULTURE", "NON-AGRICULTURE" }));
+
+        lblCategory.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblCategory.setText("Category:");
 
         comboCategory.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         comboCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT CATEGORY" }));
@@ -118,66 +124,74 @@ public class AddProduct extends javax.swing.JFrame {
             }
         });
 
-        txtPrice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtPrice.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPriceActionPerformed(evt);
-            }
-        });
-
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txtItemCode.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblStandardCost.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblStandardCost.setText("Standard Cost:");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCategory)
-                    .addComponent(lblProdtype)
-                    .addComponent(lblProductName)
-                    .addComponent(lblItemCode)
-                    .addComponent(lblPrice))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtProductName)
-                    .addComponent(comboProductType, 0, 280, Short.MAX_VALUE)
-                    .addComponent(comboCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPrice)
-                    .addComponent(txtItemCode))
+        lblMarkupcost.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblMarkupcost.setText("Markup Cost:");
+
+        javax.swing.GroupLayout addFormLayout = new javax.swing.GroupLayout(addForm);
+        addForm.setLayout(addFormLayout);
+        addFormLayout.setHorizontalGroup(
+            addFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addFormLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(addFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addFormLayout.createSequentialGroup()
+                        .addGroup(addFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblStandardCost)
+                            .addComponent(lblMarkupcost, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(addFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMarkupCost)
+                            .addComponent(txtStandardCost)))
+                    .addGroup(addFormLayout.createSequentialGroup()
+                        .addGroup(addFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblCategory)
+                            .addComponent(lblProdtype)
+                            .addComponent(lblProductName)
+                            .addComponent(lblItemCode))
+                        .addGap(18, 18, 18)
+                        .addGroup(addFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtProductName)
+                            .addComponent(comboProductType, 0, 282, Short.MAX_VALUE)
+                            .addComponent(comboCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtItemCode))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addGap(46, 46, 46))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        addFormLayout.setVerticalGroup(
+            addFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addFormLayout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addGroup(addFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblItemCode)
                     .addComponent(txtItemCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(addFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblProductName)
                     .addComponent(txtProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(addFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblProdtype)
                     .addComponent(comboProductType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(addFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCategory))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPrice))
-                .addGap(123, 123, 123)
-                .addComponent(jLabel8)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(addFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblStandardCost)
+                    .addComponent(txtStandardCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(addFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblMarkupcost)
+                    .addComponent(txtMarkupCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(101, 101, 101)
+                .addComponent(jLabel8))
         );
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
@@ -213,17 +227,16 @@ public class AddProduct extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addGap(0, 362, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 365, Short.MAX_VALUE))
+                    .addComponent(addForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addGap(43, 43, 43))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,13 +244,13 @@ public class AddProduct extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addComponent(addForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(144, 144, 144))
+                .addGap(202, 202, 202))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -248,7 +261,7 @@ public class AddProduct extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -258,13 +271,14 @@ public class AddProduct extends javax.swing.JFrame {
         ProductPage prp = new ProductPage(this.getName());
         prp.getLblUser().setText("Welcome "+this.getName());
 
-        prp.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (txtItemCode.getText().trim().equals("") || txtProductName.getText().trim().equals("")
             || comboProductType.getSelectedItem().equals("") || comboCategory.getSelectedItem().equals("")
-            || txtPrice.getText().trim().equals("")) {
+            || txtStandardCost.getText().trim().equals("") || txtMarkupCost.getText().trim().equals(""))
+        {
             JOptionPane.showMessageDialog(null, "Failed! Please fill up!");
         }else {
             if (JOptionPane.showConfirmDialog(null, "Are you sure you want to add this?", "Confirm Adding",
@@ -272,24 +286,23 @@ public class AddProduct extends javax.swing.JFrame {
             apc.add(this);
         } 
         }
-
+        
+        this.dispose();
         ProductPage prp = new ProductPage(this.getName());
         prp.getLblUser().setText("Welcome "+this.getName());
-
-//        prp.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         apc.clear(this);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPriceActionPerformed
-
     private void comboCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCategoryActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboCategoryActionPerformed
+
+    private void txtItemCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtItemCodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtItemCodeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -333,22 +346,26 @@ public class AddProduct extends javax.swing.JFrame {
     public JTextField getTxtProductName() {
         return txtProductName;
     }
-
+    
     public JComboBox getcomboCategory() {
-        return comboProductType;
+        return comboCategory;
     }
 
     public JComboBox getcomboProductType() {
-        return comboCategory;
+        return comboProductType;
     }
     
-    public JTextField getTxtPrice() {
-        return txtPrice;
+    public JTextField getTxtStandardCost() {
+        return txtStandardCost;
     }
 
+    public JTextField getTxtMarkupCost() {
+        return txtMarkupCost;
+    }
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel addForm;
     private javax.swing.JComboBox<String> comboCategory;
     private javax.swing.JComboBox<String> comboProductType;
     private javax.swing.JButton jButton1;
@@ -357,15 +374,16 @@ public class AddProduct extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblCategory;
     private javax.swing.JLabel lblItemCode;
-    private javax.swing.JLabel lblPrice;
+    private javax.swing.JLabel lblMarkupcost;
     private javax.swing.JLabel lblProdtype;
     private javax.swing.JLabel lblProductName;
+    private javax.swing.JLabel lblStandardCost;
     private javax.swing.JTextField txtItemCode;
-    private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtMarkupCost;
     private javax.swing.JTextField txtProductName;
+    private javax.swing.JTextField txtStandardCost;
     // End of variables declaration//GEN-END:variables
 
     Object getcomboUnit() {

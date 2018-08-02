@@ -6,20 +6,23 @@
 package cashierpage;
 
 import adminpage.AdminPage;
-import adminpage.AdminPageController;
+import com.sun.glass.events.KeyEvent;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import cashierpage.CashierPage;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import models.SalesModel;
 
 /**
  *
- * @author Client
+ * @author allysh@
  */
 public class ChangeFund extends javax.swing.JFrame {
 
     /**
      * Creates new form ChangeFund
      */
-    AdminPageController apc = new AdminPageController();
+    CashierPageController cpc = new CashierPageController();
     
     private String name;
     
@@ -31,7 +34,7 @@ public class ChangeFund extends javax.swing.JFrame {
         this.name = name;
     }
     
-    public ChangeFund() {
+    public ChangeFund(){
         initComponents();
         
         this.setLocationRelativeTo(null);
@@ -42,6 +45,8 @@ public class ChangeFund extends javax.swing.JFrame {
         
         this.setLocationRelativeTo(null);
         setName(name);
+        
+        SalesModel salesm = new SalesModel();
     }
 
     /**
@@ -55,7 +60,7 @@ public class ChangeFund extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtChangeFund = new javax.swing.JTextField();
+        txtChangefund = new javax.swing.JTextField();
         lblUser = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -67,6 +72,12 @@ public class ChangeFund extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Change Fund");
+
+        txtChangefund.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtChangefundActionPerformed(evt);
+            }
+        });
 
         lblUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblUser.setText("Hello, ");
@@ -90,54 +101,64 @@ public class ChangeFund extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(116, 116, 116)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(53, 53, 53)
-                        .addComponent(txtChangeFund, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jButton2)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31))))
+                        .addGap(190, 190, 190)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(53, 53, 53)
+                                .addComponent(txtChangefund, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(lblUser))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUser)
+                    .addComponent(jLabel1))
+                .addGap(16, 16, 16)
                 .addComponent(jButton2)
-                .addGap(38, 38, 38)
+                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtChangeFund, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtChangefund, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        SalesModel salesm = new SalesModel();
+        if(txtChangefund.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Failed! Please fill up!");
+        } else {
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you want to add this as start of the day?", "Confirm Start of the Day",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                cpc.addChangefund(this);
+            }
+        }
+        
         CashierPage cp = new CashierPage(this.getName());
-        
+        cp.getLblUser().setText("Welcome "+this.getName());
         cp.setVisible(true);
-        
-        this.setVisible(false);
         this.dispose();
+        
+        cp.setExtendedState(JFrame.MAXIMIZED_BOTH); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -148,6 +169,10 @@ public class ChangeFund extends javax.swing.JFrame {
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtChangefundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtChangefundActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtChangefundActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,6 +208,14 @@ public class ChangeFund extends javax.swing.JFrame {
             }
         });
     }
+    
+    public JLabel getLblUser() {
+        return lblUser;
+    }
+    
+    public JTextField getTxtChangefund(){
+        return txtChangefund;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -190,10 +223,11 @@ public class ChangeFund extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblUser;
-    private javax.swing.JTextField txtChangeFund;
+    private javax.swing.JTextField txtChangefund;
     // End of variables declaration//GEN-END:variables
 
-    public JLabel getLblUser() {
-        return lblUser;
+    int addChangefund() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

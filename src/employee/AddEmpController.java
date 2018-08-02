@@ -27,6 +27,7 @@ public class AddEmpController {
         ae.getComboRole().setSelectedItem("");
     }
     
+    /*
     public void clear (UpdateEmp upemp) {
         upemp.getTxtFname().setText("");
         upemp.getTxtLname().setText("");
@@ -35,10 +36,9 @@ public class AddEmpController {
         upemp.getTxtEmail().setText("");
         upemp.getTxtContactNo().setText("");
         upemp.getTxtAddress().setText("");
-        upemp.getComboBranch().setSelectedItem("");
         upemp.getComboRole().setSelectedItem("");
     }
-    
+    */
     
     
     public void add (AddEmp ae) {

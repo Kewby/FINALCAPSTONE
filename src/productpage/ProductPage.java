@@ -87,9 +87,9 @@ public class ProductPage extends javax.swing.JFrame {
         AdminInventory = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblProduct = new javax.swing.JTable();
-        btnDelete = new javax.swing.JButton();
-        btnAdd = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
+        DelProd = new javax.swing.JButton();
+        AddProd = new javax.swing.JButton();
+        UpdateProd = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         searchProduct = new javax.swing.JTextField();
         comboBranch = new javax.swing.JComboBox<>();
@@ -127,48 +127,45 @@ public class ProductPage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Item Code", "Item Name", "Category", "Type", "Price", "Stock"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, true, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
+        ));
         tblProduct.setRowHeight(25);
         tblProduct.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tblProduct);
 
-        btnDelete.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnDelete.setText("DELETE");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+        DelProd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        DelProd.setText("DELETE");
+        DelProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
+                DelProdActionPerformed(evt);
             }
         });
 
-        btnAdd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnAdd.setText("ADD");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        AddProd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        AddProd.setText("ADD");
+        AddProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                AddProdActionPerformed(evt);
             }
         });
 
-        btnUpdate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnUpdate.setText("UPDATE");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+        UpdateProd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        UpdateProd.setText("UPDATE");
+        UpdateProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
+                UpdateProdActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("SEARCH:");
 
+        searchProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchProductActionPerformed(evt);
+            }
+        });
         searchProduct.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 searchProductKeyReleased(evt);
@@ -205,11 +202,11 @@ public class ProductPage extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(comboBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAdd)
+                        .addComponent(AddProd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnUpdate)
+                        .addComponent(UpdateProd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDelete))
+                        .addComponent(DelProd))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -218,9 +215,9 @@ public class ProductPage extends javax.swing.JFrame {
             .addGroup(AdminInventoryLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(AdminInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDelete)
-                    .addComponent(btnAdd)
-                    .addComponent(btnUpdate)
+                    .addComponent(DelProd)
+                    .addComponent(AddProd)
+                    .addComponent(UpdateProd)
                     .addComponent(jLabel1)
                     .addComponent(searchProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboBranch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -288,7 +285,7 @@ public class ProductPage extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+    private void DelProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelProdActionPerformed
         if (tblProduct.getSelectedRow() != -1) {
             String productNumber;
             ProductPageController prp = new ProductPageController();
@@ -298,7 +295,7 @@ public class ProductPage extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Please select an item first!");
         }
-    }//GEN-LAST:event_btnDeleteActionPerformed
+    }//GEN-LAST:event_DelProdActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         AdminPage ap = new AdminPage(this.getName());
@@ -309,11 +306,11 @@ public class ProductPage extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+    private void AddProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddProdActionPerformed
         AddProduct ap = new AddProduct(this.getName());
         ap.setVisible(true);
         
-    }//GEN-LAST:event_btnAddActionPerformed
+    }//GEN-LAST:event_AddProdActionPerformed
 
     private void searchProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProductKeyReleased
        DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
@@ -348,10 +345,14 @@ public class ProductPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_comboBranchActionPerformed
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        UpdateProduct update = new UpdateProduct(this.getName(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 0).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 1).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 2).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 3).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 4).toString());
-        update.setVisible(true);
-    }//GEN-LAST:event_btnUpdateActionPerformed
+    private void UpdateProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateProdActionPerformed
+        if (tblProduct.getSelectedRow() != -1) {
+            UpdateProduct update = new UpdateProduct(this.getName(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 0).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 1).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 2).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 3).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 4).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 5).toString());
+            update.setVisible(true);    
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select an item first!");
+        }
+    }//GEN-LAST:event_UpdateProdActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ProductModel pm = new ProductModel();
@@ -368,6 +369,10 @@ public class ProductPage extends javax.swing.JFrame {
         
         tblProduct.setModel(DbUtils.resultSetToTableModel(rs));
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void searchProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchProductActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchProductActionPerformed
 
     /**
      * @param args the command line arguments
@@ -421,13 +426,13 @@ public class ProductPage extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddProd;
     private javax.swing.JPanel AdminInventory;
     private javax.swing.JLabel BrandName;
+    private javax.swing.JButton DelProd;
     private javax.swing.JLabel Logo;
     private javax.swing.JTabbedPane ProductPage;
-    private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton UpdateProd;
     private javax.swing.JComboBox<String> comboBranch;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
