@@ -5,26 +5,31 @@
  */
 package adminpage;
 
+import cashierpage.CashierPage;
 import cashierpage.ChangeFund;
-import delivery.Delivery;
+import delivery.DeliveryPage;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTabbedPane;
+import javax.swing.JOptionPane;
 import login.Login;
+import models.SalesModel;
+import models.TransactionModel;
 import peoplepage.PeoplePage;
 import productpage.ProductPage;
+import stockpage.StockPage;
 
 /**
  *
- * @author
+ * @author Allysha
  */
 public class AdminPage extends javax.swing.JFrame {
 
     /**
      * Creates new form AdminPage
      */
-    AdminPageController apc = new AdminPageController();
+    //AdminPageController apc = new AdminPageController(); //calls adminpage controller
     
+    /*
     private String name;
     
     public String getName(){
@@ -34,16 +39,28 @@ public class AdminPage extends javax.swing.JFrame {
     public void setName(String name){
         this.name = name;
     }
+    */
+    private int id;
+    JFrame frame = new JFrame();
     
     public AdminPage() {
         initComponents();
         
         this.setLocationRelativeTo(null);
+        
     }
     
-    public AdminPage(String name) {
+    public AdminPage(String name,int id) {
         initComponents();
-        
+         
+        this.setLocationRelativeTo(null);
+        setName(name);
+        setId(id);
+    }
+    
+      public AdminPage(String name) {
+        initComponents();
+         
         this.setLocationRelativeTo(null);
         setName(name);
     }
@@ -58,39 +75,38 @@ public class AdminPage extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        BrandName = new javax.swing.JLabel();
+        company = new javax.swing.JLabel();
         lblUser = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
         btnCashier = new javax.swing.JButton();
         btnProducts = new javax.swing.JButton();
         btnPeople = new javax.swing.JButton();
         btnReports = new javax.swing.JButton();
-        Logo = new javax.swing.JLabel();
-        iconCashier = new javax.swing.JLabel();
-        iconProduct = new javax.swing.JLabel();
-        iconPeople = new javax.swing.JLabel();
-        iconReports = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnDelivery = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        btnDelivery1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        BrandName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        BrandName.setText("Tanciong's General Merchandise");
+        company.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        company.setText("Tanciong's General Merchandise");
 
-        lblUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblUser.setText("Hello, ");
+        lblUser.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblUser.setText("jLabel1");
 
-        btnLogout.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnLogout.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\Tanciongs_POS\\tanciongs\\images\\exit.png")); // NOI18N
+        btnLogout.setBackground(new java.awt.Color(204, 204, 255));
+        btnLogout.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogoutActionPerformed(evt);
             }
         });
 
-        btnCashier.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnCashier.setBackground(new java.awt.Color(255, 255, 255));
+        btnCashier.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnCashier.setText("CASHIER");
         btnCashier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,7 +114,8 @@ public class AdminPage extends javax.swing.JFrame {
             }
         });
 
-        btnProducts.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnProducts.setBackground(new java.awt.Color(255, 255, 255));
+        btnProducts.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnProducts.setText("PRODUCTS");
         btnProducts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,7 +123,8 @@ public class AdminPage extends javax.swing.JFrame {
             }
         });
 
-        btnPeople.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnPeople.setBackground(new java.awt.Color(255, 255, 255));
+        btnPeople.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnPeople.setText("PEOPLE");
         btnPeople.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,23 +132,38 @@ public class AdminPage extends javax.swing.JFrame {
             }
         });
 
-        btnReports.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnReports.setBackground(new java.awt.Color(255, 255, 255));
+        btnReports.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnReports.setText("REPORTS");
 
-        Logo.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\Tanciongs_POS\\tanciongs\\images\\logo2.jpg")); // NOI18N
-
-        iconCashier.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\Tanciongs_POS\\tanciongs\\images\\cashier.png")); // NOI18N
-
-        iconProduct.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\Tanciongs_POS\\tanciongs\\images\\product.png")); // NOI18N
-
-        iconPeople.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\Tanciongs_POS\\tanciongs\\images\\people.png")); // NOI18N
-
-        iconReports.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\Tanciongs_POS\\tanciongs\\images\\reports.png")); // NOI18N
-
-        jButton1.setText("DELIVERY");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnDelivery.setBackground(new java.awt.Color(255, 255, 255));
+        btnDelivery.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnDelivery.setText("DELIVERY");
+        btnDelivery.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnDeliveryActionPerformed(evt);
+            }
+        });
+
+        jPanel2.setBackground(new java.awt.Color(255, 165, 0));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        btnDelivery1.setBackground(new java.awt.Color(255, 255, 255));
+        btnDelivery1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnDelivery1.setText("STOCKS");
+        btnDelivery1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelivery1ActionPerformed(evt);
             }
         });
 
@@ -138,89 +171,58 @@ public class AdminPage extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(176, 176, 176)
-                .addComponent(iconCashier)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Logo)
-                .addGap(4, 4, 4)
-                .addComponent(BrandName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(150, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
+                .addComponent(company)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnCashier)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnProducts))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(iconProduct)
-                                .addGap(26, 26, 26)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(btnPeople)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnReports))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(iconPeople)
-                                .addGap(63, 63, 63)
-                                .addComponent(iconReports)))))
-                .addGap(140, 140, 140))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(642, Short.MAX_VALUE)
-                    .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+                    .addComponent(lblUser, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnLogout, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(30, 30, 30))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCashier)
+                    .addComponent(btnDelivery1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnProducts)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPeople)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnReports)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDelivery)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(company)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(BrandName))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Logo)))
-                .addGap(64, 64, 64)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(iconReports, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(iconProduct, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(iconCashier, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(iconPeople, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
+                        .addComponent(lblUser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnLogout)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCashier, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPeople, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReports, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(lblUser)
-                    .addContainerGap(397, Short.MAX_VALUE)))
+                    .addComponent(btnReports, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDelivery1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,23 +233,56 @@ public class AdminPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        Login l = new Login();
-        l.setVisible(true);
-        
-        this.dispose();
+        SalesModel sm = new SalesModel();
+        TransactionModel tm = new TransactionModel();
+        int res;
+        float total;
+        res =JOptionPane.showConfirmDialog(frame, "Are you sure do you want to log out?(Your Total Sales Will be Counted.)");
+        if(res == JOptionPane.YES_OPTION){
+            total = tm.computeTotalSales(getId());
+            sm.addTotalSales(getId(), total);
+            JOptionPane.showMessageDialog(frame,"You have Successfully logged out, your total sales is P"+total+"");
+            Login l = new Login();
+            l.setVisible(true);
+             this.setVisible(false);
+         
+            this.dispose();
+        }
     }//GEN-LAST:event_btnLogoutActionPerformed
-
+    public void logout(){
+        SalesModel sm = new SalesModel();
+        TransactionModel tm = new TransactionModel();
+        int res;
+        float total;
+        res =JOptionPane.showConfirmDialog(frame, "Are you sure do you want to log out?(Your Total Sales Will be Counted.)");
+        if(res == JOptionPane.YES_OPTION){
+            total = tm.computeTotalSales(getId());
+            sm.addTotalSales(getId(), total);
+            JOptionPane.showMessageDialog(frame,"You have Successfully logged out, your total sales is P"+total+"");
+            Login l = new Login();
+            l.setVisible(true);
+             this.setVisible(false);
+         
+            this.dispose();
+        }
+    }
     private void btnCashierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCashierActionPerformed
-        ChangeFund cf = new ChangeFund(this.getName());
-        cf.getLblUser().setText("Welcome "+this.getName());
-        cf.setName(this.getName());
-        
+        SalesModel sm = new SalesModel();
+        if(sm.checkDate()>=1){
+            CashierPage cp = new CashierPage(this.getName(),this.getId());
+                        cp.getLblUser().setText("Welcome "+this.getName());
+                        cp.setVisible(true);
+                        cp.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                        this.dispose();
+        }else{
+        ChangeFund cf = new ChangeFund(this.getName(),this.getId()); //link the changefund and gets the name/username when logged in from the login
+        cf.getLblUser().setText("Welcome "+this.getName()); //displays the welcome message with the name/username
+
         cf.setVisible(true);
         this.dispose();
         
-        cf.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        
-
+        //cf.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        }
     }//GEN-LAST:event_btnCashierActionPerformed
 
     private void btnProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductsActionPerformed
@@ -257,8 +292,7 @@ public class AdminPage extends javax.swing.JFrame {
         prp.setVisible(true);
         this.dispose();
         
-        prp.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        
+        prp.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_btnProductsActionPerformed
 
     private void btnPeopleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPeopleActionPerformed
@@ -269,18 +303,26 @@ public class AdminPage extends javax.swing.JFrame {
         this.dispose();
         
         peop.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        
     }//GEN-LAST:event_btnPeopleActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Delivery d = new Delivery(this.getName());
-        d.setVisible(true);
+    private void btnDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliveryActionPerformed
+        DeliveryPage dp = new DeliveryPage(this.getName());
+        dp.getLblUser().setText("Welcome "+this.getName());
+        
+        dp.setVisible(true);
         this.dispose();
         
-        d.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        dp.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+    }//GEN-LAST:event_btnDeliveryActionPerformed
 
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnDelivery1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelivery1ActionPerformed
+       StockPage sp = new StockPage(this.getName());
+       sp.getLblUser().setText("Welcome "+this.getName());
+       
+       sp.setVisible(true);
+       this.dispose();
+       sp.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+    }//GEN-LAST:event_btnDelivery1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -323,38 +365,30 @@ public class AdminPage extends javax.swing.JFrame {
             }
         });
     }
-    
-    public JTabbedPane getAdminPage() {
-        JTabbedPane AdminPage = null;
-        return AdminPage;
-    }
 
     public JLabel getLblUser() {
         return lblUser;
     }
-    
-
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel BrandName;
-    private javax.swing.JLabel Logo;
     private javax.swing.JButton btnCashier;
+    private javax.swing.JButton btnDelivery;
+    private javax.swing.JButton btnDelivery1;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPeople;
     private javax.swing.JButton btnProducts;
     private javax.swing.JButton btnReports;
-    private javax.swing.JLabel iconCashier;
-    private javax.swing.JLabel iconPeople;
-    private javax.swing.JLabel iconProduct;
-    private javax.swing.JLabel iconReports;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel company;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblUser;
     // End of variables declaration//GEN-END:variables
 
-    Object getTblProduct() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+  public void setId(int id){
+      this.id = id;
+  }
+  
+  public int getId(){
+      return id;
+  }
 }

@@ -5,20 +5,14 @@
  */
 package adminpage;
 
-//import function.Temp;
-import models.EmployeeModel;
 
 /**
  *
- * @author 
+ * @author Allysha
  */
 public class AdminPageController {
+   
 
-    public void deleteUser(int id) {
-        EmployeeModel em = new EmployeeModel();
-        em.setEmployee_id(id);
-        int ret = em.delete();
-    }
 }
     
     

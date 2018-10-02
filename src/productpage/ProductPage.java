@@ -5,45 +5,31 @@
  */
 package productpage;
 
-import javax.swing.JLabel;
+import javax.swing.JLabel; 
 import javax.swing.JOptionPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
+import javax.swing.JTable; 
 import login.Login;
-import adminpage.AdminPage;
-import adminpage.AdminPageController;
+import adminpage.AdminPage; 
 import java.sql.ResultSet;
 import java.util.regex.PatternSyntaxException;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import net.proteanit.sql.DbUtils;
+import net.proteanit.sql.DbUtils; 
 import models.ProductModel;
 
 /**
  *
- * @author Client
+ * @author Allysha, Kirby
  */
 public class ProductPage extends javax.swing.JFrame {
 
     /**
      * Creates new form ProductPage
      */
-    AdminPageController apc = new AdminPageController();
-    
-    private String name;
-//    Object getTblProduct;
-    
-    public String getName(){
-        return name;
-    }
-    
-    public void setName(String name){
-        this.name = name;
-    }
     
     public ProductPage(){
-        initComponents();  
+        initComponents();
         
         this.setLocationRelativeTo(null);
     }
@@ -54,16 +40,16 @@ public class ProductPage extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         setName(name);
         
-        ProductModel pm = new ProductModel();
-        ResultSet rs = pm.viewAll();
-        String val = pm.determineBranch(name);
+        ProductModel pm = new ProductModel(); //links the product model           
+        ResultSet rs = pm.viewAll();          //calls the query from the product model to display the products
+        String val = pm.determineBranch(name);  
         
-         if(val.compareTo("1")==0){
+        if(val.compareTo("1")==0){
             comboBranch.setSelectedIndex(0);
-            rs = pm.viewLeyte("1");
+            rs = pm.viewAll2("1");
         }else{
             comboBranch.setSelectedIndex(1);
-            rs = pm.viewLeyte("2");
+            rs = pm.viewAll2("2");
         }
         
         tblProduct.setModel(DbUtils.resultSetToTableModel(rs));
@@ -78,44 +64,38 @@ public class ProductPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Logo = new javax.swing.JLabel();
-        BrandName = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        company = new javax.swing.JLabel();
         lblUser = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
         ProductPage = new javax.swing.JTabbedPane();
         AdminInventory = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblProduct = new javax.swing.JTable();
-        DelProd = new javax.swing.JButton();
-        AddProd = new javax.swing.JButton();
-        UpdateProd = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         searchProduct = new javax.swing.JTextField();
         comboBranch = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        BrandName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        BrandName.setText("Tanciong's General Merchandise");
+        company.setText("Tanciong's General Merchandise");
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton3.setText("BACK");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        lblUser.setText("jLabel1");
+
+        btnBack.setText("BACK");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnBackActionPerformed(evt);
             }
         });
 
-        lblUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblUser.setText("Hello, ");
-
-        jButton6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton6.setText("LOGOUT");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnLogout.setText("LOGOUT");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnLogoutActionPerformed(evt);
             }
         });
 
@@ -134,31 +114,27 @@ public class ProductPage extends javax.swing.JFrame {
         tblProduct.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tblProduct);
 
-        DelProd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        DelProd.setText("DELETE");
-        DelProd.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setText("ADD");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DelProdActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
 
-        AddProd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        AddProd.setText("ADD");
-        AddProd.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdate.setText("UPDATE");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddProdActionPerformed(evt);
+                btnUpdateActionPerformed(evt);
             }
         });
 
-        UpdateProd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        UpdateProd.setText("UPDATE");
-        UpdateProd.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setText("DELETE");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateProdActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("SEARCH:");
 
         searchProduct.addActionListener(new java.awt.event.ActionListener() {
@@ -179,13 +155,6 @@ public class ProductPage extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("REFRESH");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout AdminInventoryLayout = new javax.swing.GroupLayout(AdminInventory);
         AdminInventory.setLayout(AdminInventoryLayout);
         AdminInventoryLayout.setHorizontalGroup(
@@ -198,16 +167,14 @@ public class ProductPage extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(searchProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(comboBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAdd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AddProd)
+                        .addComponent(btnUpdate)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(UpdateProd)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(DelProd))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE))
+                        .addComponent(btnDelete))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE))
                 .addContainerGap())
         );
         AdminInventoryLayout.setVerticalGroup(
@@ -215,16 +182,14 @@ public class ProductPage extends javax.swing.JFrame {
             .addGroup(AdminInventoryLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(AdminInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DelProd)
-                    .addComponent(AddProd)
-                    .addComponent(UpdateProd)
+                    .addComponent(btnDelete)
+                    .addComponent(btnAdd)
+                    .addComponent(btnUpdate)
                     .addComponent(jLabel1)
-                    .addComponent(searchProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboBranch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(searchProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBranch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
         );
 
         ProductPage.addTab("PRODUCTS", AdminInventory);
@@ -237,39 +202,28 @@ public class ProductPage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Logo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BrandName)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton6)))
-                            .addComponent(ProductPage))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(company)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblUser))
+                    .addComponent(ProductPage)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnBack)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLogout)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(BrandName))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblUser)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton6))
-                            .addComponent(Logo))))
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUser)
+                    .addComponent(company))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLogout)
+                    .addComponent(btnBack))
+                .addGap(18, 18, 18)
                 .addComponent(ProductPage)
                 .addContainerGap())
         );
@@ -277,40 +231,40 @@ public class ProductPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         Login l = new Login();
         l.setVisible(true);
 
         this.setVisible(false);
         this.dispose();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
-    private void DelProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelProdActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        //delete button to delete a product
         if (tblProduct.getSelectedRow() != -1) {
             String productNumber;
-            ProductPageController prp = new ProductPageController();
-            
+            ProductPageController ppc = new ProductPageController(); //links productpagecontroller
             productNumber = tblProduct.getValueAt(tblProduct.getSelectedRow(), 0).toString();
-            prp.deleteProduct(productNumber);
+            ppc.deleteProduct(productNumber); //calls the delete function from the controller
         } else {
             JOptionPane.showMessageDialog(null, "Please select an item first!");
         }
-    }//GEN-LAST:event_DelProdActionPerformed
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        //goes back to the adminpage
         AdminPage ap = new AdminPage(this.getName());
         ap.getLblUser().setText("Welcome "+this.getName());
         ap.setVisible(true);
-        
-        this.setVisible(false);
+       
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnBackActionPerformed
 
-    private void AddProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddProdActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        //links to an add product form. the admin will fill up there.
         AddProduct ap = new AddProduct(this.getName());
         ap.setVisible(true);
-        
-    }//GEN-LAST:event_AddProdActionPerformed
+    }//GEN-LAST:event_btnAddActionPerformed
 
     private void searchProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProductKeyReleased
        DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
@@ -328,9 +282,9 @@ public class ProductPage extends javax.swing.JFrame {
         ResultSet rs = null;
         
         if(comboBranch.getSelectedItem().toString().compareTo("Cebu Branch")==0){
-            rs = pm.viewLeyte("1");
+            rs = pm.viewAll2("1");
         }else{
-            rs = pm.viewLeyte("2");
+            rs = pm.viewAll2("2");
         }
         
         tblProduct.setModel(DbUtils.resultSetToTableModel(rs)); 
@@ -345,30 +299,14 @@ public class ProductPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_comboBranchActionPerformed
 
-    private void UpdateProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateProdActionPerformed
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         if (tblProduct.getSelectedRow() != -1) {
-            UpdateProduct update = new UpdateProduct(this.getName(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 0).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 1).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 2).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 3).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 4).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 5).toString());
-            update.setVisible(true);    
+            UpdateProduct up = new UpdateProduct(this.getName(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 0).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 1).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 2).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 3).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 4).toString(), tblProduct.getValueAt(tblProduct.getSelectedRow(), 5).toString());
+            up.setVisible(true);    
         } else {
             JOptionPane.showMessageDialog(null, "Please select an item first!");
         }
-    }//GEN-LAST:event_UpdateProdActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ProductModel pm = new ProductModel();
-        ResultSet rs = null;
-        String val = pm.determineBranch(name);
-        
-         if(val.compareTo("1")==0){
-            comboBranch.setSelectedIndex(0);
-            rs = pm.viewLeyte("1");
-        }else{
-            comboBranch.setSelectedIndex(1);
-            rs = pm.viewLeyte("2");
-        }
-        
-        tblProduct.setModel(DbUtils.resultSetToTableModel(rs));
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void searchProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchProductActionPerformed
         // TODO add your handling code here:
@@ -409,34 +347,29 @@ public class ProductPage extends javax.swing.JFrame {
             }
         });
     }
-    
-    public JTabbedPane getAdminPage(){
-        JTabbedPane AdminPage = null;
-        return AdminPage;
-    }
+
     
     public JTable getTblProduct(){  
         return tblProduct;
     }
     
-     public JLabel getLblUser() {
+    public JLabel getLblUser() {
         return lblUser;
     }
     
-
+    
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddProd;
     private javax.swing.JPanel AdminInventory;
-    private javax.swing.JLabel BrandName;
-    private javax.swing.JButton DelProd;
-    private javax.swing.JLabel Logo;
     private javax.swing.JTabbedPane ProductPage;
-    private javax.swing.JButton UpdateProd;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> comboBranch;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JLabel company;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblUser;
@@ -444,15 +377,4 @@ public class ProductPage extends javax.swing.JFrame {
     private javax.swing.JTable tblProduct;
     // End of variables declaration//GEN-END:variables
 
-    private void viewAll(ProductPage aThis) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void deleteProduct(ProductPage aThis) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    Object TblProduct() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

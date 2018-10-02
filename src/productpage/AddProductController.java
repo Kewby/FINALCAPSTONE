@@ -18,23 +18,23 @@ import models.ProductModel;
 public class AddProductController {
 
     public void clear(AddProduct ap) {
-        ap.getTxtItemCode().setText("");
+        ap.getTxtProductCode().setText("");
         ap.getTxtProductName().setText("");
         ap.getcomboProductType().setSelectedIndex(0);
         ap.getcomboCategory().setSelectedIndex(0);
         ap.getTxtStandardCost().setText("");
         ap.getTxtMarkupCost().setText("");
-        ap.getTxtItemCode().requestFocus();
+        ap.getTxtProductCode().requestFocus();
     }
 
     public void add(AddProduct ap) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-yy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         
         int productType  = 0;
 
         ProductModel pm = new ProductModel();
         
-        pm.setProduct_code(ap.getTxtItemCode().getText().trim());
+        pm.setProduct_code(ap.getTxtProductCode().getText().trim());
         pm.setProduct_name(ap.getTxtProductName().getText().trim());
         
         pm.setProduct_category(pm.determineCategory(ap.getcomboCategory().getSelectedItem().toString()));
@@ -42,7 +42,7 @@ public class AddProductController {
         
         productType = (ap.getcomboProductType().getSelectedItem().toString().compareToIgnoreCase("AGRICULTURE")==0)?1:0;
         pm.setProduct_type(productType);
-        
+
         pm.setStandard_cost(Float.parseFloat(ap.getTxtStandardCost().getText().trim()));
         pm.setMarkup_cost(Float.parseFloat(ap.getTxtMarkupCost().getText().trim()));
         pm.setBranch_id(Integer.parseInt(pm.determineBranch(ap.getName()))); //determines which branch the product will be added

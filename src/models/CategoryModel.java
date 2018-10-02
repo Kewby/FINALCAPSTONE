@@ -8,8 +8,6 @@ package models;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -26,7 +24,7 @@ public class CategoryModel extends MyModel {
         ResultSet ret = null;
         this.initialize();
         
-        String str = "SELECT category_name FROM category";
+        String str = "SELECT category_name FROM `category`";
         
         try {
             st = conn.createStatement();

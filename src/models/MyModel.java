@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author 
+ * @author Allysha
  */
 //public class MyModel {
 //    
@@ -41,7 +41,7 @@ import java.util.logging.Logger;
 
 public class MyModel {
     
-    Connection conn = null;
+    Connection conn = null; 
     String username = "root";
     String password = "";
     

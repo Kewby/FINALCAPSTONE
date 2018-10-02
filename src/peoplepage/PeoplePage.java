@@ -20,14 +20,11 @@ import javax.swing.table.TableRowSorter;
 import models.SupplierModel;
 import models.EmployeeModel;
 import net.proteanit.sql.DbUtils;
-import supplier.AddSupplier;
-import employee.AddEmp;
-import employee.UpdateEmp;
-import productpage.UpdateProduct;
 
+//
 /**
  *
- * @author Client
+ * @author Allysha
  */
 public class PeoplePage extends javax.swing.JFrame {
 
@@ -35,6 +32,8 @@ public class PeoplePage extends javax.swing.JFrame {
      * Creates new form PeoplePage
      */
     AdminPageController apc = new AdminPageController();
+    //PeoplePageController ppl = new PeoplePageController();
+    
     
     private String name;
     
@@ -89,11 +88,10 @@ public class PeoplePage extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollBar1 = new javax.swing.JScrollBar();
-        jLabel1 = new javax.swing.JLabel();
-        BrandName = new javax.swing.JLabel();
+        company = new javax.swing.JLabel();
         lblUser = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         AdminPage = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -115,27 +113,21 @@ public class PeoplePage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\ProjectPOS\\tanciongs\\images\\logo2.jpg")); // NOI18N
+        company.setText("Tanciong's General Merchandise");
 
-        BrandName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        BrandName.setText("Tanciong's General Merchandise");
+        lblUser.setText("jLabel1");
 
-        lblUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblUser.setText("Hello, ");
-
-        jButton6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton6.setText("LOGOUT");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnLogout.setText("LOGOUT");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnLogoutActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton3.setText("BACK");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setText("BACK");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnBackActionPerformed(evt);
             }
         });
 
@@ -146,23 +138,14 @@ public class PeoplePage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "First Name", "Last Name", "Username", "Email", "Contact Number"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
+        ));
         tblEmp.setRowHeight(25);
         tblEmp.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblEmp);
         tblEmp.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        AddEmp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         AddEmp.setText("ADD");
         AddEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,7 +153,6 @@ public class PeoplePage extends javax.swing.JFrame {
             }
         });
 
-        UpdateEmp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         UpdateEmp.setText("UPDATE");
         UpdateEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,7 +160,6 @@ public class PeoplePage extends javax.swing.JFrame {
             }
         });
 
-        DeleteEmp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         DeleteEmp.setText("DELETE");
         DeleteEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,7 +167,6 @@ public class PeoplePage extends javax.swing.JFrame {
             }
         });
 
-        jLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel.setText("Search:");
 
         searchUser.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -209,35 +189,35 @@ public class PeoplePage extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchUser, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(searchUser, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
                         .addComponent(comboBranch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(AddEmp)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(UpdateEmp)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(DeleteEmp)))
+                        .addComponent(DeleteEmp)
+                        .addGap(29, 29, 29)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(comboBranch, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(DeleteEmp)
-                        .addComponent(AddEmp)
-                        .addComponent(UpdateEmp)
-                        .addComponent(jLabel)
-                        .addComponent(searchUser, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DeleteEmp)
+                    .addComponent(AddEmp)
+                    .addComponent(UpdateEmp)
+                    .addComponent(jLabel)
+                    .addComponent(searchUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBranch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -248,7 +228,7 @@ public class PeoplePage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Company Name", "Address", "Email", "Contact No", "Contact Person"
+
             }
         ));
         jScrollPane2.setViewportView(tblSupplier);
@@ -263,6 +243,11 @@ public class PeoplePage extends javax.swing.JFrame {
 
         UpdateSupplier.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         UpdateSupplier.setText("UPDATE");
+        UpdateSupplier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateSupplierActionPerformed(evt);
+            }
+        });
 
         AddSupplier.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         AddSupplier.setText("ADD");
@@ -288,7 +273,7 @@ public class PeoplePage extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 774, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -327,100 +312,109 @@ public class PeoplePage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AdminPage)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BrandName)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(AdminPage)
                         .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnBack)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(company)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblUser)))
+                        .addGap(133, 133, 133))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblUser)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton6))
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(BrandName, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(company, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUser))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBack)
+                    .addComponent(btnLogout))
+                .addGap(18, 18, 18)
                 .addComponent(AdminPage)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         Login l = new Login();
         l.setVisible(true);
 
         this.dispose();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         AdminPage ap = new AdminPage(this.getName());
         ap.getLblUser().setText("Welcome "+this.getName());
         ap.setVisible(true);
 
         this.setVisible(false);
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnBackActionPerformed
 
     private void AddEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEmpActionPerformed
+        this.dispose();
         AddEmp ae = new AddEmp(this.getName());
         ae.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_AddEmpActionPerformed
 
     private void DeleteEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteEmpActionPerformed
     if (tblEmp.getSelectedRow() != -1) {
-            String empNumber;
-            PeoplePageController peop = new PeoplePageController();
-            
-            empNumber = tblEmp.getValueAt(tblEmp.getSelectedRow(), 0).toString();
+            int empNumber;
+            PeoplePageController peop = new PeoplePageController();            
+            empNumber = Integer.parseInt(tblEmp.getModel().getValueAt(tblEmp.getSelectedRow(), 0).toString());
             peop.deleteEmp(empNumber);
-        } else {
+            
+            EmployeeModel em = new EmployeeModel();
+            ResultSet rs = null;
+            String val = em.determineBranch(name);
+
+             if(val.compareTo("1")==0){
+                comboBranch.setSelectedIndex(0);
+                rs = em.viewLeyte("1");
+            }else{
+                comboBranch.setSelectedIndex(1);
+                rs = em.viewLeyte("2");
+            }
+
+            tblEmp.setModel(DbUtils.resultSetToTableModel(rs));
+            
+            } 
+    else {
             JOptionPane.showMessageDialog(null, "Please select a row first!");
         }
     }//GEN-LAST:event_DeleteEmpActionPerformed
 
     private void AddSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSupplierActionPerformed
+        this.dispose();
         AddSupplier as = new AddSupplier(this.getName());
         as.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_AddSupplierActionPerformed
 
     private void DeleteSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteSupplierActionPerformed
        if (tblSupplier.getSelectedRow() != -1) {
-            int x = tblSupplier.getSelectedRow();
-            int y = tblSupplier.getSelectedColumn();
-            String z = tblSupplier.getModel().getValueAt(x,0).toString();
-            int del = Integer.parseInt(z);
-            int opt = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete?");
-            if (opt == JOptionPane.YES_OPTION){
-                apc.deleteUser(del);
-                ((DefaultTableModel)tblSupplier.getModel()).removeRow(x);
-            }
-        } else {
+            int supplierNumber;
+            PeoplePageController peop = new PeoplePageController();            
+            supplierNumber = Integer.parseInt(tblSupplier.getModel().getValueAt(tblSupplier.getSelectedRow(), 0).toString());
+            peop.deleteSupplier(supplierNumber);
+            
+            SupplierModel sm = new SupplierModel();
+            ResultSet rs = sm.viewAll();
+            tblSupplier.setModel(DbUtils.resultSetToTableModel(rs));
+            } 
+    else {
             JOptionPane.showMessageDialog(null, "Please select a row first!");
         }
+       
     }//GEN-LAST:event_DeleteSupplierActionPerformed
 
     private void comboBranchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBranchActionPerformed
@@ -446,9 +440,13 @@ public class PeoplePage extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBranchActionPerformed
 
     private void UpdateEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateEmpActionPerformed
-        UpdateEmp ue = new UpdateEmp(this.getName());
-        ue.setVisible(true);
-        this.dispose();
+        if (tblEmp.getSelectedRow() != -1) {
+            UpdateEmp ue = new UpdateEmp(this.getName(), Integer.parseInt(tblEmp.getValueAt(tblEmp.getSelectedRow(), 0).toString()), tblEmp.getValueAt(tblEmp.getSelectedRow(), 1).toString(), tblEmp.getValueAt(tblEmp.getSelectedRow(), 2).toString(), tblEmp.getValueAt(tblEmp.getSelectedRow(), 3).toString(), tblEmp.getValueAt(tblEmp.getSelectedRow(), 4).toString(), tblEmp.getValueAt(tblEmp.getSelectedRow(), 5).toString(), tblEmp.getValueAt(tblEmp.getSelectedRow(), 6).toString(),  tblEmp.getValueAt(tblEmp.getSelectedRow(), 7).toString());
+            ue.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select an item first!");
+        }
     }//GEN-LAST:event_UpdateEmpActionPerformed
 
     private void searchUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchUserKeyReleased
@@ -472,6 +470,16 @@ public class PeoplePage extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_searchSupplierKeyReleased
+
+    private void UpdateSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateSupplierActionPerformed
+        if (tblSupplier.getSelectedRow() != -1) {
+            UpdateSupplier us = new UpdateSupplier(this.getName(), Integer.parseInt(tblSupplier.getValueAt(tblSupplier.getSelectedRow(), 0).toString()), tblSupplier.getValueAt(tblSupplier.getSelectedRow(), 1).toString(), tblSupplier.getValueAt(tblSupplier.getSelectedRow(), 2).toString(), tblSupplier.getValueAt(tblSupplier.getSelectedRow(), 3).toString(), tblSupplier.getValueAt(tblSupplier.getSelectedRow(), 4).toString(), tblSupplier.getValueAt(tblSupplier.getSelectedRow(), 5).toString());
+            us.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select an item first!");
+        }
+    }//GEN-LAST:event_UpdateSupplierActionPerformed
 
     /**
      * @param args the command line arguments
@@ -516,7 +524,7 @@ public class PeoplePage extends javax.swing.JFrame {
         return searchUser;
     }
     
-    public JTable getTblUser() {
+    public JTable getTblEmp() {
         return tblEmp;
     }
 
@@ -524,16 +532,15 @@ public class PeoplePage extends javax.swing.JFrame {
     private javax.swing.JButton AddEmp;
     private javax.swing.JButton AddSupplier;
     private javax.swing.JTabbedPane AdminPage;
-    private javax.swing.JLabel BrandName;
     private javax.swing.JButton DeleteEmp;
     private javax.swing.JButton DeleteSupplier;
     private javax.swing.JButton UpdateEmp;
     private javax.swing.JButton UpdateSupplier;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JComboBox<String> comboBranch;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JLabel company;
     private javax.swing.JLabel jLabel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

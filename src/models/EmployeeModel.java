@@ -10,15 +10,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author 
+ * @author Allysha
  */
 public class EmployeeModel extends MyModel {
     
-    private int employee_id;
+    public int employee_id;
     private String employee_firstname;
     private String employee_lastname;
     private String username;
@@ -30,16 +30,32 @@ public class EmployeeModel extends MyModel {
     private int isAdmin;
     private int deleteStatus;
     
-    public ResultSet viewAll () {
+    public ResultSet login () { //checks from the database if the username and password inputted from the login is found
+        Statement st;
+        ResultSet ret = null;
+        this.initialize(); //initialize db
+        
+        String str = "SELECT * FROM `employee` where username = '"+this.username+"' and password = '"+this.password+"' limit 1";
+        
+        try {
+            st = conn.createStatement();     
+            ret = st.executeQuery(str);
+        } catch (SQLException ex) {}
+        return ret;
+    }
+    
+    public ResultSet viewAll () { //displays only all the employees from cebu branch. Admin/s from cebu are not shown
         Statement st;
         this.initialize(); //initialize db
         
-        String str = "SELECT employee_firstname AS 'First Name', employee_lastname AS 'Last Name', username AS 'Username', employee_email AS 'E-mail', employee_contactnumber AS 'Contact Number' FROM employee WHERE branch_id=1 AND isAdmin=0 AND deleteStatus=0"; //all not admin emp
+        String str = "SELECT employee_id AS 'Employee ID Number', employee_firstname AS 'First Name', employee_lastname AS 'Last Name', username AS 'Username', employee_email AS 'E-mail', employee_contactnumber AS 'Contact Number', employee_address AS 'Address', "
+                + "(CASE WHEN isAdmin = '0' THEN 'Cashier' ELSE 'Admin' END) AS Role FROM employee WHERE branch_id=1 AND isAdmin=0 AND deleteStatus=0";
+        //branch_id = 1 is cebu, branch_id = 2 is leyte
         
         try {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery(str);
-            
+         
             return rs;
             
         } catch (SQLException ex) {}
@@ -50,33 +66,17 @@ public class EmployeeModel extends MyModel {
         Statement st;
         this.initialize(); //initialize db
         
-        String str = "SELECT employee_firstname AS 'First Name', employee_lastname AS 'Last Name', username AS 'Username', employee_email AS 'E-mail', employee_contactnumber AS 'Contact Number' FROM employee WHERE branch_id="+id+" AND isAdmin=0 AND deleteStatus=0"; //all not admin emp 
+        String str = "SELECT employee_id AS 'Employee ID Number',employee_firstname AS 'First Name', employee_lastname AS 'Last Name', username AS 'Username', employee_email AS 'E-mail', employee_contactnumber AS 'Contact Number', employee_address AS 'Address', "
+                + "(CASE WHEN isAdmin = '0' THEN 'Cashier' ELSE 'Admin' END) AS Role FROM employee WHERE branch_id="+id+" AND isAdmin=0 AND deleteStatus=0"; //all not admin emp 
         
         try {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery(str);
             
-        
             return rs;
             
         } catch (SQLException ex) {}
         return null;
-    }
-    
-    public ResultSet login () {
-        Statement st;
-        ResultSet ret = null;
-        this.initialize(); //initialize db
-        
-        String str = "select * from employee where username = '"
-                +this.username+"' and password = '"+this.password+"' limit 1";
-        
-        
-        try {
-            st = conn.createStatement();     
-            ret = st.executeQuery(str);
-        } catch (SQLException ex) {}
-        return ret;
     }
     
     public int add () {
@@ -84,7 +84,7 @@ public class EmployeeModel extends MyModel {
         int ret = 0;
         this.initialize();
         String str = "INSERT into `employee` (`employee_id`, `employee_firstname`, `employee_lastname`, `username`, `password`, `employee_email`, `employee_contactnumber`, `employee_address`, `branch_id`, `isAdmin`, `deleteStatus`) values (null, '"+this.employee_firstname+"', '"+this.employee_lastname+"', '"+this.username+"','"+this.password+"', '"+this.employee_email+"', '"+this.employee_contactnumber+"', '"+this.employee_address+"', '"+this.branch_id+"', '"+this.isAdmin+"', 0)";
-          
+        System.out.println(str); 
         
         try {
             st = conn.prepareStatement(str);
@@ -95,7 +95,7 @@ public class EmployeeModel extends MyModel {
         return ret;
     }
     
-    public int delete () {
+    public int delete() {
         Statement st;
         int ret = 0;
         this.initialize(); //initialize db
@@ -116,7 +116,6 @@ public class EmployeeModel extends MyModel {
         Statement st;
         int ret = 0;
         this.initialize(); //initialize db
-       
         
          String str = "UPDATE `employee` SET `employee_firstname`= '"+this.employee_firstname+"', "
                 + " `employee_lastname` = '"+this.employee_lastname+"', "
@@ -126,8 +125,10 @@ public class EmployeeModel extends MyModel {
                 + " `employee_contactnumber` = '"+this.employee_contactnumber+"', "
                 + " `employee_address` = '"+this.employee_address+"', "
                 + " `isAdmin` = '"+this.isAdmin+"', "
-                + " `deleteStatus` = '"+this.deleteStatus+"'";
-        
+                + " `deleteStatus` = '"+this.deleteStatus+"' "
+                 + "WHERE `employee_id` = '"+this.employee_id+"'";
+         
+         System.out.println(str);
         
         try {
             st = conn.createStatement();
@@ -158,6 +159,60 @@ public class EmployeeModel extends MyModel {
         } catch (SQLException ex) {}
         return ret;
     }
+    
+    //Delivery Form
+    public ResultSet getEmployee(){
+        Statement st;
+        ResultSet ret = null;
+        this.initialize();
+        
+        String str = "SELECT username FROM employee";
+        
+        try {
+            st = conn.createStatement();
+            ret = st.executeQuery(str);
+        } catch (SQLException ex) {}
+        return ret;
+    }
+    
+    //ROLE 1
+//    public ResultSet getRole() {
+//        Statement st;
+//        ResultSet ret = null;
+//        this.initialize();
+//        
+//        String str = "SELECT isAdmin FROM `employee`";
+//        
+//        try {
+//            st = conn.createStatement();
+//            ret = st.executeQuery(str);
+//        } catch (SQLException ex) {}
+//        return ret;
+//    }   
+      
+    public int determineRole (String role) { //displays the category name instead of the category id
+        Statement st;
+        ResultSet rs = null;
+        int ret = 0;
+        this.initialize(); //initialize db
+        
+        String str = "SELECT `role_id` FROM role WHERE role_name = '"
+                +role+"' limit 1";
+        
+        System.out.println("Role is:"+role);
+        
+        try {
+            st = conn.createStatement();     
+            rs = st.executeQuery(str);
+            
+            //retrive the value from the first return row.
+            rs.next();
+            System.out.println("Success");
+            ret = Integer.parseInt(rs.getString(1));
+        } catch (SQLException ex) {}
+        return ret;
+    }
+    
     
 
     public int getEmployee_id() {
@@ -243,6 +298,8 @@ public class EmployeeModel extends MyModel {
     public void isAdmin(int role) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
 
     
 }

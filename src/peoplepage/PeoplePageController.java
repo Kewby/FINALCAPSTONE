@@ -5,28 +5,38 @@
  */
 package peoplepage;
 
-import cashierpage.CashierPage;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import models.EmployeeModel;
-import adminpage.AdminPage;
-import models.ProductModel;
+import models.SupplierModel;
+import net.proteanit.sql.DbUtils;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
- * @author Client
+ * @author Allysha
  */
 public class PeoplePageController {
     
-    public void deleteEmp(String employee_firstname){
+    public void deleteEmp(int empID){
         EmployeeModel em = new EmployeeModel();
          
-        em.setEmployee_firstname(employee_firstname);
+        em.setEmployee_id(empID);
          
         if (em.delete() == 1){
+             JOptionPane.showMessageDialog(null, "Successfully Deleted!");
+         } else {
+             JOptionPane.showMessageDialog(null, "Failed!");
+         }
+    }
+    
+    public void deleteSupplier(int supplierID){
+        SupplierModel sm = new SupplierModel();
+         
+        sm.setSupplier_id(supplierID);
+         
+        if (sm.delete() == 1){
              JOptionPane.showMessageDialog(null, "Successfully Deleted!");
          } else {
              JOptionPane.showMessageDialog(null, "Failed!");

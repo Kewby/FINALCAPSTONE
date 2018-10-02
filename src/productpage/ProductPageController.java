@@ -16,46 +16,9 @@ import models.ProductModel;
 
 /**
  *
- * @author 
+ * @author Allysha, Kirby
  */
 public class ProductPageController {
-    
-    
-    
-     public ResultSet test(){
-        ProductModel pm = new ProductModel();
-        ResultSet rs = pm.viewAll();
-            
-            return rs;
-     }
-    
-     public ResultSet viewAll (){
-        Vector row;
-        ProductModel pm = new ProductModel();
-        ResultSet rs = pm.viewAll();
-        
-        DefaultTableModel dm;
-        //dm = (DefaultTableModel) prp.getTblProduct().getModel();
-        //dm. setRowCount(0);
-        
-        try {
-            while (rs.next()) {
-                row = new Vector();
-                
-                row.add(rs.getInt("product_code"));
-                row.add(rs.getInt("product_name"));
-                row.add(rs.getInt("product_category"));
-                row.add(rs.getInt("product_type"));
-                row.add(rs.getInt("list_price"));
-                //row.add(rs.getInt("product_stock"));
-                
-                //dm.addRow(row);
-            }
-        } catch (Exception ex) {
-            Logger.getLogger (ProductPageController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return rs;
-    }
      
      public void deleteProduct(String id) {
          ProductModel pm = new ProductModel();
@@ -67,9 +30,8 @@ public class ProductPageController {
          } else {
              JOptionPane.showMessageDialog(null, "Failed!");
          }
-     }    
-
-    
+     }
+      
 }
     
     

@@ -10,10 +10,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+
 
 /**
  *
- * @author 
+ * @author Allysha
  */
 public class ProductModel extends MyModel{
     private int product_id;
@@ -26,14 +30,15 @@ public class ProductModel extends MyModel{
     private float list_price;
     private int branch_id;
     private int deleteStatus;
+    JFrame frame = new JFrame();
     
-    public ResultSet viewAll () { //Views all the list of product in the assigned branch
+    
+    public ResultSet viewAll () { //displays all the data from database. Mixes the cebu products and leyte products
         Statement st;
         ResultSet ret = null;
         this.initialize(); //initialize db
         
-        String str = "SELECT product_code AS 'Product Code', "
-                + "product_name AS 'Name', (SELECT category.category_name FROM category WHERE product.category_id = category.category_id) AS 'Category', "
+        String str = "SELECT product_code AS 'Product Code', product_name AS 'Product Name', (SELECT category.category_name FROM category WHERE product.category_id = category.category_id) AS 'Product Category', "
                 + "(CASE WHEN product_type = 'true' THEN 'Non-Agricultural' ELSE 'Agricultural' END) AS 'Product Type', `standard_cost` AS 'Standard Cost', `markup_cost` AS 'Markup Cost', `list_price` AS 'List Price' FROM `product` where deleteStatus = 0";
         
         try {
@@ -41,17 +46,17 @@ public class ProductModel extends MyModel{
             ret = st.executeQuery(str);
             ResultSet rs = st.executeQuery(str);
         } catch (SQLException ex) {}
-        return null;
+        return ret;
     }
     
-    public ResultSet viewLeyte (String id) {
+    public ResultSet viewAll2 (String id) { //this is what displays on the current productpage table. Because of the branch_id. It only displays cebu products if it is logged in from cebu admin
         Statement st;
+        ResultSet ret = null;
         this.initialize(); //initialize db
     
-        
-        String str = "SELECT product_code AS 'Product Code', "
-                + "product_name AS 'Item Name', (SELECT category.category_name FROM category WHERE product.category_id = category.category_id) AS 'Category', "
-                + "(CASE WHEN product_type = 'true' THEN 'Non-Agricultural' ELSE 'Agricultural' END) AS 'Type', `standard_cost` AS 'Standard Cost', `markup_cost` AS 'Markup Cost', list_price AS 'List Price' from product where branch_id="+id+" AND deleteStatus = 0"; 
+        String str = "SELECT product_code AS 'Product Code', product_name AS 'Product Name', (SELECT category.category_name FROM `category` WHERE product.category_id = category.category_id) AS 'Product Category', "
+                + "(CASE WHEN product_type = 'true' THEN 'Non-Agricultural' ELSE 'Agricultural' END) AS 'Product Type', `standard_cost` AS 'Standard Cost', `markup_cost` AS 'Markup Cost', list_price AS 'List Price' FROM `product` WHERE branch_id="+id+" AND deleteStatus = 0"; 
+        //the query determines the products from which branch the admin is logged in
         
         try {
             st = conn.createStatement();
@@ -61,36 +66,20 @@ public class ProductModel extends MyModel{
             return rs;
             
         } catch (SQLException ex) {}
-        return null;
+        return ret;
     }
     
-    public ResultSet viewAll2 (String id) {
-        Statement st;
-        this.initialize(); //initialize db
+    public int add () { //admins can only add products into the database from the addproduct form. if cebu is logged in, the products will  automatically be added to the cebu products. admins cannot add products to a different branch, unless logged in as leyte admin
+       Statement st;
+       int ret = 0;
+       this.initialize(); //initialize db
         
-        String str = "SELECT product_code AS 'Product Code', "
-                + "product_name AS 'Item Name', "
-                + "list_price AS 'Price' from product where branch_id="+this.branch_id+" AND deleteStatus = 0";
-        try {
-            st = conn.createStatement();
-            ResultSet rs = st.executeQuery(str);
-            
-            return rs;
-            
-        } catch (SQLException ex) {}
-        return null;
-    }
-    
-    public int add () {
-        Statement st;
-        int ret = 0;
-        this.initialize(); //initialize db
-        
-        String str = "INSERT INTO `product` (`product_id`, `product_code`, `product_name`, `product_type`, `category_id`, `standard_cost`, `markup_cost`, `branch_id`, `deleteStatus`) values (NULL, '"
+       String str = "INSERT INTO `product` (`product_id`, `product_code`, `product_name`, `product_type`, `category_id`, `standard_cost`, `markup_cost`, `branch_id`, `deleteStatus`) VALUES (NULL, '"
                 +this.product_code+"', '"+this.product_name+"', '"
                 +this.product_type+"', '"+this.category_id+"', '"
                 +this.standard_cost+"', '"+this.markup_cost+"','"+this.branch_id+"', 0)";
-        
+       //query does not need the list_price because once data is inserted into standard_cost and markup_code, the list_price automatically computes it in the database
+      
         System.out.println(str);
         try {
             st = conn.createStatement();
@@ -101,13 +90,17 @@ public class ProductModel extends MyModel{
         return ret;
     }
     
-    public int update(){
+    public int update(){ //admins can only update products. the product code cannot be changed
         Statement st;
         int ret = 0;
         this.initialize(); //initialize db
         
-          String str = "UPDATE `product` SET `product_name` = '"+this.product_name+"', `product_type` = '"+this.product_type+"', `category_id` = '"+this.category_id+"', `standard_cost` = '"+this.standard_cost+"',`markup_cost` = '"+this.markup_cost+"' WHERE `product_code` = '"+this.product_code+"'"; 
-        
+        String str = "UPDATE `product` SET `product_name` = '"+this.product_name+"',"
+                + " `product_type` = '"+this.product_type+"',"
+                + " `category_id` = '"+this.category_id+"',"
+                + " `standard_cost` = '"+this.standard_cost+"',"
+                + "`markup_cost` = '"+this.markup_cost+"' WHERE `product_code` = '"+this.product_code+"'"; 
+         
         try {
             st = conn.createStatement();
             ret = st.executeUpdate(str);
@@ -117,12 +110,13 @@ public class ProductModel extends MyModel{
         return ret;
     }
     
-    public int delete () {
+    public int delete () { //the product is only deleted from the system, but it still exist in the database. this is only a soft delete, not a permanent delete
         Statement st;
         int ret = 0;
         this.initialize(); //initialize db delete product
         
-        String str = "UPDATE product set deleteStatus = 1 where product_code = '"+this.product_code+"'"; //Query
+        String str = "UPDATE product SET deleteStatus = 1 WHERE product_code = '"+this.product_code+"'"; 
+        //only changes the deleteStatus of a product
         
         System.out.println(str);
         try {
@@ -134,7 +128,7 @@ public class ProductModel extends MyModel{
         return ret;
     }
     
-    public String determineBranch (String username) {
+    public String determineBranch (String username) { //determines which branch is the username from, cebu or leyte branch
         Statement st;
         ResultSet rs = null;
         String ret = null;
@@ -153,19 +147,20 @@ public class ProductModel extends MyModel{
         return ret;
     }
     
-    public int determineCategory (String category) { 
+    public int determineCategory (String category) { //displays the category name instead of the category id
         Statement st;
         ResultSet rs = null;
         int ret = 0;
         this.initialize(); //initialize db
         
-        String str = "select `category_id` from category where category_name = '"
+        String str = "SELECT `category_id` FROM category WHERE category_name = '"
                 +category+"' limit 1";
         System.out.println(str);
         
         try {
             st = conn.createStatement();     
             rs = st.executeQuery(str);
+            
             //retrive the value from the first return row.
             rs.next();
             System.out.println("HELLO");
@@ -173,8 +168,30 @@ public class ProductModel extends MyModel{
         } catch (SQLException ex) {}
         return ret;
     }
-    
-    
+ 
+    public ResultSet search(long id){ //cashier page input product code search bar
+        Statement st;
+        ResultSet ret = null;
+        this.initialize();
+        
+        String str = "SELECT * FROM `product` WHERE product_code ="+id+" LIMIT 1";
+        
+        try{
+        
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery(str);
+            if(!rs.isBeforeFirst())
+             JOptionPane.showMessageDialog(frame,"The Product Code does not exist.");
+            
+            rs.next();
+            return rs;
+           
+        }catch(SQLException ex){
+           
+            return ret;
+            
+        }
+    }
     
     //Getters and Setters
     public int getProduct_id() {
@@ -241,23 +258,5 @@ public class ProductModel extends MyModel{
         this.branch_id = product_id;
     }
 
-    
-    
-    
-    
-    
-    
-    public ResultSet viewAll(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setCategory_id(int determineCategory) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public String getCategory_id() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
     
 }

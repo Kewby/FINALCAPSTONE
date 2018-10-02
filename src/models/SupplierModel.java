@@ -30,8 +30,8 @@ public class SupplierModel extends MyModel {
         Statement st;
         int ret = 0;
         this.initialize();
-        String str = "UPDATE supplier SET deleteStatus = 1 WHERE supplier_id = '"+this.supplier_id+"'";
-        System.out.println(str);
+        String str = "UPDATE `supplier` SET deleteStatus = 1 WHERE supplier_id = '"+this.supplier_id+"'";
+        System.out.println("Supplier ID:" + str);
         
         try {
             st = conn.prepareStatement(str);
@@ -42,12 +42,36 @@ public class SupplierModel extends MyModel {
         return ret;
     }
     
+    public int update(){
+        Statement st;
+        int ret = 0;
+        this.initialize(); //initialize db
+        
+         String str = "UPDATE `supplier` SET `supplier_name`= '"+this.supplier_name+"', "
+                + " `supplier_address` = '"+this.supplier_address+"', "
+                + " `supplier_email` = '"+this.supplier_email+"', "
+                + " `supplier_contactnumber` = '"+this.supplier_contactnumber+"', "
+                + " `supplier_contactperson` = '"+this.supplier_contactperson+"',"
+                + " `deleteStatus` = '"+this.deleteStatus+"' "
+                + "WHERE `supplier_id` = '"+this.supplier_id+"'";
+         
+         System.out.println(str);
+        
+        try {
+            st = conn.createStatement();
+            ret = st.executeUpdate(str);
+        } catch (SQLException ex) {
+            Logger.getLogger(SupplierModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
+    }
+    
     public ResultSet viewAll () {
         Statement st;
 //        ResultSet ret = null;
         this.initialize(); //initialize db
         
-        String str = "SELECT supplier_name as 'Company Name', supplier_address as 'Address', supplier_email as 'Email', supplier_contactnumber as 'Contact No', supplier_contactperson as 'Contact Person' FROM supplier where deleteStatus=0"; //all not admin user
+        String str = "SELECT supplier_id as 'Supplier ID', supplier_name as 'Company Name', supplier_address as 'Address', supplier_email as 'Email', supplier_contactnumber as 'Contact No', supplier_contactperson as 'Contact Person' FROM supplier where deleteStatus=0"; //all not admin user
         
         try {
             st = conn.createStatement();
@@ -64,8 +88,7 @@ public class SupplierModel extends MyModel {
         ResultSet ret = null;
         this.initialize(); //initialize db
         
-        String str = "select * from user where username = '"
-                +this.username+"' and password = '"+this.password+"' limit 1";
+        String str = "SELECT * FROM `employee` where username = '"+this.username+"' and password = '"+this.password+"' limit 1";
         
         
         try {
@@ -79,10 +102,8 @@ public class SupplierModel extends MyModel {
         Statement st;
         int ret = 0;
         this.initialize();
-        String str = "insert into supplier values (null, '"+this.supplier_name+"','"+this.supplier_address+"', '"+this.supplier_email+"','"+this.supplier_contactnumber+"', '"+this.supplier_contactperson+"')";
-        System.out.println(this.supplier_id);
-        System.out.println(this.supplier_name);
-        
+        String str = "INSERT into `supplier` (`supplier_id`, `supplier_name`,`supplier_address`, `supplier_email`,`supplier_contactnumber`,`supplier_contactperson`, `deleteStatus`) VALUES(null, '"+this.supplier_name+"', '"+this.supplier_address+"', '"+this.supplier_email+"','"+this.supplier_contactnumber+"', '"+this.supplier_contactperson+"', 0)";
+
         try {
             st = conn.prepareStatement(str);
             ret = st.executeUpdate(str);
@@ -91,6 +112,23 @@ public class SupplierModel extends MyModel {
         
         return ret;
     }
+    
+    //Delivery Form
+    public ResultSet getSupplier(){
+        Statement st;
+        ResultSet ret = null;
+        this.initialize();
+        
+        String str = "SELECT supplier_name FROM supplier";
+        
+        try {
+            st = conn.createStatement();
+            ret = st.executeQuery(str);
+        } catch (SQLException ex) {}
+        return ret;
+    }
+    
+    
 
     public int getSupplier_id() {
         return supplier_id;

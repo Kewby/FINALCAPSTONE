@@ -23,6 +23,7 @@ public class UpdateProductController {
         updc.getcomboCategory().setSelectedIndex(0);
         updc.getcomboProductType().setSelectedIndex(0);
         updc.getTxtStandardCost().setText("");
+        updc.getTxtMarkupCost().setText("");
         updc.getTxtItemCode().requestFocus();
     }
 
@@ -34,7 +35,7 @@ public class UpdateProductController {
         
         pm.setProduct_code(updc.getTxtItemCode().getText().trim());
         pm.setProduct_name(updc.getTxtProductName().getText().trim());
-        pm.setProduct_category(pm.determineCategory(updc.getcomboCategory().getSelectedItem().toString()));
+        pm.setProduct_category(pm.determineCategory(updc.getcomboProductType().getSelectedItem().toString()));
         System.out.print("Category ID: "+pm.getProduct_category());
         
         productType = (updc.getcomboProductType().getSelectedItem().toString().compareToIgnoreCase("AGRICULTURE")==0)?1:0;

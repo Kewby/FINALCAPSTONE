@@ -5,19 +5,17 @@
  */
 package productpage;
 
+import productpage.ProductPage; 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import productpage.AddProductController;
 /**
  *
- * @author Client
+ * @author allysh@, kirby
  */
 public class AddProduct extends javax.swing.JFrame {
 
@@ -26,6 +24,7 @@ public class AddProduct extends javax.swing.JFrame {
      */
     AddProductController apc = new AddProductController();
     
+    /*
     private String name;
     
     public String getName(){
@@ -35,6 +34,7 @@ public class AddProduct extends javax.swing.JFrame {
     public void setName(String name){
         this.name = name;
     }
+    */
     
     public AddProduct() {
         initComponents();
@@ -70,17 +70,17 @@ public class AddProduct extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         addForm = new javax.swing.JPanel();
         lblItemCode = new javax.swing.JLabel();
-        txtItemCode = new javax.swing.JTextField();
         lblProductName = new javax.swing.JLabel();
-        txtProductName = new javax.swing.JTextField();
         lblProdtype = new javax.swing.JLabel();
-        comboProductType = new javax.swing.JComboBox<>();
         lblCategory = new javax.swing.JLabel();
-        comboCategory = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         lblStandardCost = new javax.swing.JLabel();
-        txtStandardCost = new javax.swing.JTextField();
         lblMarkupcost = new javax.swing.JLabel();
+        txtProductCode = new javax.swing.JTextField();
+        txtProductName = new javax.swing.JTextField();
+        comboProductType = new javax.swing.JComboBox<>();
+        comboCategory = new javax.swing.JComboBox<>();
+        txtStandardCost = new javax.swing.JTextField();
         txtMarkupCost = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
@@ -93,36 +93,16 @@ public class AddProduct extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblItemCode.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblItemCode.setText("Item Code:");
-
-        txtItemCode.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtItemCode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtItemCodeActionPerformed(evt);
-            }
-        });
+        lblItemCode.setText("Product Code:");
 
         lblProductName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblProductName.setText("Product Name:");
 
-        txtProductName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         lblProdtype.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblProdtype.setText("Product Type:");
 
-        comboProductType.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        comboProductType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT TYPE", "AGRICULTURE", "NON-AGRICULTURE" }));
-
         lblCategory.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblCategory.setText("Category:");
-
-        comboCategory.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        comboCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT CATEGORY" }));
-        comboCategory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboCategoryActionPerformed(evt);
-            }
-        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -131,6 +111,32 @@ public class AddProduct extends javax.swing.JFrame {
 
         lblMarkupcost.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblMarkupcost.setText("Markup Cost:");
+
+        txtProductCode.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtProductCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtProductCodeActionPerformed(evt);
+            }
+        });
+
+        txtProductName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        comboProductType.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        comboProductType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT TYPE", "AGRICULTURE", "NON-AGRICULTURE" }));
+        comboProductType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboProductTypeActionPerformed(evt);
+            }
+        });
+
+        comboCategory.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        comboCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT CATEGORY" }));
+
+        txtStandardCost.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtStandardCostKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout addFormLayout = new javax.swing.GroupLayout(addForm);
         addForm.setLayout(addFormLayout);
@@ -158,7 +164,7 @@ public class AddProduct extends javax.swing.JFrame {
                             .addComponent(txtProductName)
                             .addComponent(comboProductType, 0, 282, Short.MAX_VALUE)
                             .addComponent(comboCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtItemCode))))
+                            .addComponent(txtProductCode))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addGap(46, 46, 46))
@@ -169,7 +175,7 @@ public class AddProduct extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(addFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblItemCode)
-                    .addComponent(txtItemCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtProductCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(addFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblProductName)
@@ -270,23 +276,24 @@ public class AddProduct extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ProductPage prp = new ProductPage(this.getName());
         prp.getLblUser().setText("Welcome "+this.getName());
-
+        
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (txtItemCode.getText().trim().equals("") || txtProductName.getText().trim().equals("")
+        if (txtProductCode.getText().trim().equals("") || txtProductName.getText().trim().equals("")
             || comboProductType.getSelectedItem().equals("") || comboCategory.getSelectedItem().equals("")
-            || txtStandardCost.getText().trim().equals("") || txtMarkupCost.getText().trim().equals(""))
-        {
+            || txtStandardCost.getText().trim().equals("") || txtMarkupCost.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Failed! Please fill up!");
         }else {
-            if (JOptionPane.showConfirmDialog(null, "Are you sure you want to add this?", "Confirm Adding",
-                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you want to add this?", "Confirm Adding", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             apc.add(this);
+            
+           ProductPage pp = new ProductPage();
+
         } 
         }
-        
+
         this.dispose();
         ProductPage prp = new ProductPage(this.getName());
         prp.getLblUser().setText("Welcome "+this.getName());
@@ -296,13 +303,18 @@ public class AddProduct extends javax.swing.JFrame {
         apc.clear(this);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void comboCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCategoryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboCategoryActionPerformed
+    private void txtStandardCostKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStandardCostKeyReleased
 
-    private void txtItemCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtItemCodeActionPerformed
+
+    }//GEN-LAST:event_txtStandardCostKeyReleased
+
+    private void txtProductCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProductCodeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtItemCodeActionPerformed
+    }//GEN-LAST:event_txtProductCodeActionPerformed
+
+    private void comboProductTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboProductTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboProductTypeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,30 +351,32 @@ public class AddProduct extends javax.swing.JFrame {
         });
     }
     
-    public JTextField getTxtItemCode(){
-        return txtItemCode;
+    
+    //Getters
+    public JTextField getTxtProductCode(){
+        return txtProductCode;
     }
     
     public JTextField getTxtProductName() {
         return txtProductName;
     }
     
-    public JComboBox getcomboCategory() {
-        return comboCategory;
-    }
-
     public JComboBox getcomboProductType() {
         return comboProductType;
+    }
+
+    public JComboBox getcomboCategory() {
+        return comboCategory;
     }
     
     public JTextField getTxtStandardCost() {
         return txtStandardCost;
     }
-
+    
     public JTextField getTxtMarkupCost() {
         return txtMarkupCost;
     }
-   
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addForm;
@@ -380,14 +394,10 @@ public class AddProduct extends javax.swing.JFrame {
     private javax.swing.JLabel lblProdtype;
     private javax.swing.JLabel lblProductName;
     private javax.swing.JLabel lblStandardCost;
-    private javax.swing.JTextField txtItemCode;
     private javax.swing.JTextField txtMarkupCost;
+    private javax.swing.JTextField txtProductCode;
     private javax.swing.JTextField txtProductName;
     private javax.swing.JTextField txtStandardCost;
     // End of variables declaration//GEN-END:variables
-
-    Object getcomboUnit() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

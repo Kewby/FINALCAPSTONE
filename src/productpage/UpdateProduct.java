@@ -10,11 +10,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import productpage.AddProductController;
 /**
  *
  * @author Client
@@ -38,7 +35,6 @@ public class UpdateProduct extends javax.swing.JFrame {
     
     public UpdateProduct() {
         initComponents();
-        
         this.setLocationRelativeTo(null);
         
         //DATA YOU CAN ONLY UPDATE
@@ -61,7 +57,7 @@ public class UpdateProduct extends javax.swing.JFrame {
         txtProductName.setText(productName);
         txtStandardCost.setText(standardCost);
         txtMarkupCost.setText(markupCost);
- 
+        
         rs = updc.getCategories();
         if(productType.compareToIgnoreCase("AGRICULTURAL")==0){
             comboProductType.setSelectedIndex(1);
@@ -91,30 +87,26 @@ public class UpdateProduct extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         lblItemCode = new javax.swing.JLabel();
         lblProductName = new javax.swing.JLabel();
         lblProdtype = new javax.swing.JLabel();
         lblCategory = new javax.swing.JLabel();
-        lblStandardCost = new javax.swing.JLabel();
         txtProductName = new javax.swing.JTextField();
         comboProductType = new javax.swing.JComboBox<>();
         comboCategory = new javax.swing.JComboBox<>();
-        txtStandardCost = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtItemCode = new javax.swing.JTextField();
+        txtStandardCost = new javax.swing.JTextField();
+        lblStandardCost = new javax.swing.JLabel();
+        lblMarkup = new javax.swing.JLabel();
         txtMarkupCost = new javax.swing.JTextField();
-        lblMarkupCost = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblItemCode.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblItemCode.setText("Item Code:");
@@ -127,9 +119,6 @@ public class UpdateProduct extends javax.swing.JFrame {
 
         lblCategory.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblCategory.setText("Category:");
-
-        lblStandardCost.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblStandardCost.setText("Standard Cost:");
 
         txtProductName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -149,26 +138,15 @@ public class UpdateProduct extends javax.swing.JFrame {
             }
         });
 
-        txtStandardCost.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtStandardCost.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtStandardCostActionPerformed(evt);
-            }
-        });
-
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         txtItemCode.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txtMarkupCost.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtMarkupCost.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMarkupCostActionPerformed(evt);
-            }
-        });
+        lblStandardCost.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblStandardCost.setText("Standard Cost:");
 
-        lblMarkupCost.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblMarkupCost.setText("Markup Cost:");
+        lblMarkup.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblMarkup.setText("Markup Cost:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -182,15 +160,15 @@ public class UpdateProduct extends javax.swing.JFrame {
                     .addComponent(lblProductName)
                     .addComponent(lblItemCode)
                     .addComponent(lblStandardCost)
-                    .addComponent(lblMarkupCost))
+                    .addComponent(lblMarkup))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtMarkupCost)
+                    .addComponent(txtStandardCost)
                     .addComponent(txtProductName)
                     .addComponent(comboProductType, 0, 313, Short.MAX_VALUE)
                     .addComponent(comboCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtStandardCost)
-                    .addComponent(txtItemCode))
+                    .addComponent(txtItemCode)
+                    .addComponent(txtMarkupCost))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addGap(46, 46, 46))
@@ -198,7 +176,7 @@ public class UpdateProduct extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblItemCode)
                     .addComponent(txtItemCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -214,17 +192,16 @@ public class UpdateProduct extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCategory))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtStandardCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblStandardCost))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(lblStandardCost)
+                    .addComponent(txtStandardCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMarkupCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblMarkupCost))
-                .addGap(94, 94, 94)
-                .addComponent(jLabel8)
-                .addContainerGap(33, Short.MAX_VALUE))
+                    .addComponent(lblMarkup))
+                .addGap(189, 189, 189)
+                .addComponent(jLabel8))
         );
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
@@ -251,51 +228,40 @@ public class UpdateProduct extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addGap(0, 363, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addGap(43, 43, 43))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(144, 144, 144))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -304,10 +270,6 @@ public class UpdateProduct extends javax.swing.JFrame {
     private void comboCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCategoryActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboCategoryActionPerformed
-
-    private void txtStandardCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStandardCostActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtStandardCostActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         updc.clear(this);
@@ -327,23 +289,18 @@ public class UpdateProduct extends javax.swing.JFrame {
 
         ProductPage prp = new ProductPage(this.getName());
         prp.getLblUser().setText("Welcome "+this.getName());
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ProductPage prp = new ProductPage(this.getName());
         prp.getLblUser().setText("Welcome "+this.getName());
-
+        
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void comboProductTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboProductTypeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboProductTypeActionPerformed
-
-    private void txtMarkupCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMarkupCostActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMarkupCostActionPerformed
 
     /**
      * @param args the command line arguments
@@ -389,20 +346,22 @@ public class UpdateProduct extends javax.swing.JFrame {
     }
 
     public JComboBox getcomboCategory() {
-        return comboCategory;
+        return comboProductType;
     }
 
     public JComboBox getcomboProductType() {
-        return comboProductType;
+        return comboCategory;
     }
     
-    public JTextField getTxtStandardCost() {
+    public JTextField getTxtStandardCost(){
         return txtStandardCost;
     }
     
-    public JTextField getTxtMarkupCost() {
+    public JTextField getTxtMarkupCost(){
         return txtMarkupCost;
     }
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> comboCategory;
@@ -412,11 +371,10 @@ public class UpdateProduct extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblCategory;
     private javax.swing.JLabel lblItemCode;
-    private javax.swing.JLabel lblMarkupCost;
+    private javax.swing.JLabel lblMarkup;
     private javax.swing.JLabel lblProdtype;
     private javax.swing.JLabel lblProductName;
     private javax.swing.JLabel lblStandardCost;
