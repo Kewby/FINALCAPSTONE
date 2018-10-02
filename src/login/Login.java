@@ -52,8 +52,6 @@ public class Login extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setMinimumSize(new java.awt.Dimension(0, 0));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\AllyshaCopy\\tanciongs\\images\\logo_e.png")); // NOI18N
-
         jPanel1.setBackground(new java.awt.Color(255, 165, 0));
 
         BrandName.setFont(new java.awt.Font("Bebas Neue", 0, 28)); // NOI18N

@@ -254,7 +254,7 @@ public class ProductPage extends javax.swing.JFrame {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         //goes back to the adminpage
         AdminPage ap = new AdminPage(this.getName());
-        ap.getLblUser().setText("Welcome "+this.getName());
+        ap.getLblUser().setText("Welcome, "+this.getName());
         ap.setVisible(true);
        
         this.dispose();

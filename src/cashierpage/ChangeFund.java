@@ -231,7 +231,7 @@ public class ChangeFund extends javax.swing.JFrame {
         }
         
         CashierPage cp = new CashierPage(this.getName(),this.getId(),this.getIsAdmin());
-        cp.getLblUser().setText("Welcome "+this.getName());
+        cp.getLblUser().setText("Welcome, "+this.getName());
 
 
         cp.setVisible(true);
@@ -242,7 +242,7 @@ public class ChangeFund extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         AdminPage ap = new AdminPage(this.getName(),this.getId());
-        ap.getLblUser().setText("Welcome "+this.getName());
+        ap.getLblUser().setText("Welcome, "+this.getName());
         ap.setVisible(true);
         
         this.setVisible(false);

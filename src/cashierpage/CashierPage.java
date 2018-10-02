@@ -541,7 +541,7 @@ public class CashierPage extends javax.swing.JFrame {
         
        
         AdminPage ap = new AdminPage(this.getName(),this.getId());
-        ap.getLblUser().setText("Welcome "+this.getName());
+        ap.getLblUser().setText("Welcome, "+this.getName());
         ap.setVisible(true);
         
         this.setVisible(false);

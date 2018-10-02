@@ -270,13 +270,13 @@ public class AdminPage extends javax.swing.JFrame {
         SalesModel sm = new SalesModel();
         if(sm.checkDate()>=1){
             CashierPage cp = new CashierPage(this.getName(),this.getId());
-                        cp.getLblUser().setText("Welcome "+this.getName());
+                        cp.getLblUser().setText("Welcome, "+this.getName());
                         cp.setVisible(true);
                         cp.setExtendedState(JFrame.MAXIMIZED_BOTH);
                         this.dispose();
         }else{
         ChangeFund cf = new ChangeFund(this.getName(),this.getId()); //link the changefund and gets the name/username when logged in from the login
-        cf.getLblUser().setText("Welcome "+this.getName()); //displays the welcome message with the name/username
+        cf.getLblUser().setText("Welcome, "+this.getName()); //displays the welcome message with the name/username
 
         cf.setVisible(true);
         this.dispose();
@@ -287,7 +287,7 @@ public class AdminPage extends javax.swing.JFrame {
 
     private void btnProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductsActionPerformed
         ProductPage prp = new ProductPage(this.getName());
-        prp.getLblUser().setText("Welcome "+this.getName());
+        prp.getLblUser().setText("Welcome, "+this.getName());
         
         prp.setVisible(true);
         this.dispose();
@@ -297,7 +297,7 @@ public class AdminPage extends javax.swing.JFrame {
 
     private void btnPeopleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPeopleActionPerformed
         PeoplePage peop = new PeoplePage(this.getName());
-        peop.getLblUser().setText("Welcome "+this.getName());
+        peop.getLblUser().setText("Welcome, "+this.getName());
         
         peop.setVisible(true);
         this.dispose();
@@ -307,7 +307,7 @@ public class AdminPage extends javax.swing.JFrame {
 
     private void btnDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliveryActionPerformed
         DeliveryPage dp = new DeliveryPage(this.getName());
-        dp.getLblUser().setText("Welcome "+this.getName());
+        dp.getLblUser().setText("Welcome, "+this.getName());
         
         dp.setVisible(true);
         this.dispose();
@@ -317,7 +317,7 @@ public class AdminPage extends javax.swing.JFrame {
 
     private void btnDelivery1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelivery1ActionPerformed
        StockPage sp = new StockPage(this.getName());
-       sp.getLblUser().setText("Welcome "+this.getName());
+       sp.getLblUser().setText("Welcome, "+this.getName());
        
        sp.setVisible(true);
        this.dispose();
