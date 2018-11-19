@@ -115,6 +115,7 @@ public class DeliveryForm extends javax.swing.JFrame {
         comboSupplier.setBounds(270, 440, 290, 40);
 
         txtEmployee.setFont(new java.awt.Font("Montserrat Light", 1, 14)); // NOI18N
+        txtEmployee.setText("Username");
         txtEmployee.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(244, 158, 9), 4));
         jPanel1.add(txtEmployee);
         txtEmployee.setBounds(270, 500, 290, 40);
@@ -189,21 +190,22 @@ public class DeliveryForm extends javax.swing.JFrame {
             dc.addForm(this);
             System.out.println("Added Delivery Notification");
             
-            }
-            if (JOptionPane.showConfirmDialog(null, "Do you want to add/update stocks?", "Confirm Adding",
-                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                if(stm.determineProdStock(dm.determineProduct(txtProductCode.getText().trim())) != dm.determineProduct(txtProductCode.getText().trim())){
-                    dc.addStock(this);
-                    System.out.println("ADDED Stock Notification");
-                    System.out.println("ProdID is:"+ dm.determineProduct(txtProductCode.getText().trim()));
-                    System.out.println("ProdStock is:"+ stm.determineProdStock(dm.determineProduct(txtProductCode.getText().trim())));
-                    System.out.println("StockID is:"+ stm.determineStockID(dm.determineProduct(txtProductCode.getText().trim())));
+                if (JOptionPane.showConfirmDialog(null, "Do you want to add/update stocks?", "Confirm Adding",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    if(stm.determineProdStock(dm.determineProduct(txtProductCode.getText().trim())) != dm.determineProduct(txtProductCode.getText().trim())){
+                        dc.addStock(this);
+                        System.out.println("ADDED Stock Notification");
+                        System.out.println("ProdID is:"+ dm.determineProduct(txtProductCode.getText().trim()));
+                        System.out.println("ProdStock is:"+ stm.determineProdStock(dm.determineProduct(txtProductCode.getText().trim())));
+                        System.out.println("StockID is:"+ stm.determineStockID(dm.determineProduct(txtProductCode.getText().trim())));
+                    }
+                    else {
+                        dc.updateStock(this);
+                        System.out.println("UPDATE Stock Notification");
+                    }
                 }
-                else {
-                    dc.updateStock(this);
-                    System.out.println("UPDATE Stock Notification");
-                }
             }
+            
         }
         
         DeliveryPage dp = new DeliveryPage(this.getName());

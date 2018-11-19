@@ -18,7 +18,7 @@ public class UpdateSupplierController {
     
     public void clear(UpdateSupplier usc){
         usc.getTxtSupplierName().setText("");
-        usc.getTxtAddress();
+        usc.getTxtAddress().setText("");
         usc.getTxtEmail().setText("");
         usc.getTxtContactNumber().setText("");
         usc.getTxtContactPerson().setText("");

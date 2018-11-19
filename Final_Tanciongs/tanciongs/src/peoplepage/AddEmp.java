@@ -190,7 +190,7 @@ public class AddEmp extends javax.swing.JFrame {
     }//GEN-LAST:event_AddEmpClearActionPerformed
 
     private void AddEmpAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEmpAddActionPerformed
-            if(txtFname.getText().trim().equals("") || txtLname.getText().trim().equals("") 
+        if(txtFname.getText().trim().equals("") || txtLname.getText().trim().equals("") 
                 || txtUsername.getText().trim().equals("") || txtPassword.getText().trim().equals("") 
                 || txtConfirm.getText().trim().equals("") || txtEmail.getText().trim().equals("")
                 || txtContactNo.getText().trim().equals("") || txtAddress.getText().trim().equals("")
@@ -207,13 +207,13 @@ public class AddEmp extends javax.swing.JFrame {
             if (JOptionPane.showConfirmDialog(null, "Are you sure you want to add this?", "Confirm Adding",
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 aec.add(this);
-            } 
+                
+                PeoplePage peop = new PeoplePage(this.getName());
+                peop.getLblUser().setText("Welcome, "+this.getName());
+                peop.setVisible(true);
+                peop.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            }
         }
-        
-        PeoplePage peop = new PeoplePage(this.getName());
-        peop.getLblUser().setText("Welcome "+this.getName());
-        peop.setVisible(true);
-        peop.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_AddEmpAddActionPerformed
 
     private void AddEmpCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEmpCancelActionPerformed

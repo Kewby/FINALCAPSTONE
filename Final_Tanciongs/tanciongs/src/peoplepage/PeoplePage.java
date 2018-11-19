@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import login.Login;
 import adminpage.AdminPage;
-import adminpage.AdminPageController;
 import java.sql.ResultSet;
 import java.util.regex.PatternSyntaxException;
 import javax.swing.JTable;
@@ -31,7 +30,7 @@ public class PeoplePage extends javax.swing.JFrame {
     /**
      * Creates new form PeoplePage
      */
-    AdminPageController apc = new AdminPageController();
+    
     //PeoplePageController ppl = new PeoplePageController();
     
     
@@ -394,7 +393,7 @@ public class PeoplePage extends javax.swing.JFrame {
             us.setVisible(true);
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "Please select an item first!");
+            JOptionPane.showMessageDialog(null, "Please select an supplier first!");
         }
     }//GEN-LAST:event_UpdateSupplierActionPerformed
 
@@ -410,7 +409,7 @@ public class PeoplePage extends javax.swing.JFrame {
             tblSupplier.setModel(DbUtils.resultSetToTableModel(rs));
         }
         else {
-            JOptionPane.showMessageDialog(null, "Please select a row first!");
+            JOptionPane.showMessageDialog(null, "Please select a supplier first!");
         }
 
     }//GEN-LAST:event_DeleteSupplierActionPerformed
@@ -460,7 +459,7 @@ public class PeoplePage extends javax.swing.JFrame {
 
         }
         else {
-            JOptionPane.showMessageDialog(null, "Please select a row first!");
+            JOptionPane.showMessageDialog(null, "Please select an employee first!");
         }
     }//GEN-LAST:event_DeleteEmpActionPerformed
 
@@ -470,7 +469,7 @@ public class PeoplePage extends javax.swing.JFrame {
             ue.setVisible(true);
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "Please select an item first!");
+            JOptionPane.showMessageDialog(null, "Please select an employee first!");
         }
     }//GEN-LAST:event_UpdateEmpActionPerformed
 
