@@ -1,0 +1,30 @@
+<?php
+
+	include_once ('..\connection.php');   
+
+	$employee_id = $_GET['EmployeeID'];
+	$employee_firstname = $_GET['fname'];
+	$employee_lastname = $_GET['lname'];
+	$username = $_GET['username'];
+	$password = $_GET['password'];
+	$employee_email = $_GET['email'];
+	$employee_contactnumber = $_GET['number'];
+	$employee_address = $_GET['address'];
+	$branch_id = $_GET['branch'];
+	$isAdmin = $_GET['role'];
+	$deleteStatus = $_GET['delstatus'];
+
+
+	$conn = getConnection();
+	
+
+	$query = "UPDATE `employee` SET deleteStatus = 1 WHERE employee_id = '".$employee_id."'";
+
+			
+			
+		echo $query;
+
+		$result = mysqli_query($conn, $query) or die ("ERROR" .mysqli_error($conn));
+    	echo $result;
+
+	?>
